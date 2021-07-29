@@ -6,7 +6,7 @@
 
 async function init() {
 
-const data = await d3.csv('https://github.com/brchung2/dv_narrativeviz/blob/86a519b343b6ab548c94a8c211eb34df752d7930/emission.csv');
+const data = await d3.csv('/emission.csv');
     console.log(data);
     d3.select('body')
       .selectAll('p')
