@@ -104,6 +104,29 @@ svg.append("text")
 .style("text-anchor", "middle")
 .text("CO2 Emissions - billion metric tons"); 
 
+	
+                
+var path = svg.append("path")
+.datum(data.filter(function(d) {return d.Year <= 1975;}))
+.attr("fill", "none")
+.attr("stroke", "#4CAF50")
+.attr("stroke-width", 2)
+.attr("d", d3.line()
+    .x(function(d) { return x(d.year) })
+    .y(function(d) { return y(d.emission) })
+)
+
+// Animate emissions line
+var pathLength = path.node().getTotalLength();
+
+path.attr("stroke-dasharray", pathLength)
+    .attr("stroke-dashoffset", pathLength)
+    .transition()
+    .duration(4000) 
+    .ease(d3.easeSin) 
+    .attr("stroke-dashoffset", 0);
+	
+	
     
 }
 </script>
