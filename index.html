@@ -107,7 +107,7 @@ svg.append("text")
 	
                 
 var path = svg.append("path")
-.datum(data.filter(function(d) {return d.Year <= 1975;}))
+.datum(data.filter(function(d) {return d.year <= 1973;}))
 .attr("fill", "none")
 .attr("stroke", "#4CAF50")
 .attr("stroke-width", 2)
@@ -122,7 +122,7 @@ var pathLength = path.node().getTotalLength();
 path.attr("stroke-dasharray", pathLength)
     .attr("stroke-dashoffset", pathLength)
     .transition()
-    .duration(4000) 
+    .duration(3500) 
     .ease(d3.easeSin) 
     .attr("stroke-dashoffset", 0);
 	
