@@ -52,7 +52,7 @@ var svg = d3.select("body")
     "translate(" + margin.left + "," + margin.top + ")");
 	
     
-const data = await d3.csv('emission2.csv');
+const data = await d3.csv('emission3.csv');
     console.log(data);
 //     d3.select('body')
 //       .selectAll('p')
@@ -88,12 +88,12 @@ svg.append("text")
 	
  // Add Y axis for Emissions
 var y = d3.scaleLinear()
-.domain([0, 35000000])
+.domain([0, 35])
 .range([ height, 0]);
 
-formatValue = d3.format(".2s");
+// formatValue = d3.format(".2s");
 svg.append("g")
-.call(d3.axisLeft(y).tickFormat(function(d) { return formatValue(d); }));
+.call(d3.axisLeft(y).tickFormat(d3.format("d")));
 
 // Text label for the Emissions y axis
 svg.append("text")
