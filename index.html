@@ -21,6 +21,13 @@
 async function init() {
 
 const data = await d3.csv('emission.csv');
+    console.log(data);
+    d3.select('body')
+      .selectAll('p')
+      .data(data)
+      .enter()
+      .append('p')
+      .html(function(d,i) {return 'year ' + d.year + ' = ' + d.emission + d.country ;});
 
 }
 </script>
