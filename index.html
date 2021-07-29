@@ -52,7 +52,7 @@ var svg = d3.select("body")
     "translate(" + margin.left + "," + margin.top + ")");
 	
     
-const data = await d3.csv('emission.csv');
+const data = await d3.csv('emission2.csv');
     console.log(data);
 //     d3.select('body')
 //       .selectAll('p')
@@ -113,7 +113,7 @@ var path = svg.append("path")
 .attr("stroke-width", 2)
 .attr("d", d3.line()
     .x(function(d) { return x(d.year) })
-    .y(function(d) { return y(d.emission) })
+    .y(function(d) { return y(d.WLD) })
 )
 
 // Animate emissions line
