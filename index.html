@@ -33,15 +33,15 @@
     
 <body onload='init()'> 
     
-    
+
 <script>
 
 async function init() {
 
 // 2. Use the margin convention practice 
 var margin = {top: 50, right: 50, bottom: 50, left: 50}
-  , width = window.innerWidth - margin.left - margin.right // Use the window's width 
-  , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
+  , width = 740 - margin.left - margin.right
+  , weight = 450 - margin.top - margin.bottom;
 
 // Add svg
 var svg = d3.select("body")
@@ -89,11 +89,11 @@ svg.append("text")
 	
  // Add Y axis for Emissions
 var y = d3.scaleLinear()
-.domain([14, 23])
+.domain([0, 35])
 .range([ height, 0]);
 
 svg.append("g")
-.call(d3.axisLeft(y));
+.call(d3.axisLeft(y)).tickFormat(function(d) { return formatValue(d).replace('M', 'million'); });;
 
 // Text label for the Emissions y axis
 svg.append("text")
