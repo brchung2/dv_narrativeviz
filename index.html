@@ -6,14 +6,14 @@
 
 async function init() {
 
-const data = await d3.csv('https://flunky.github.io/cars2017.csv');
+const data = await d3.csv('https://github.com/brchung2/dv_narrativeviz/blob/86a519b343b6ab548c94a8c211eb34df752d7930/emission.csv');
     console.log(data);
     d3.select('body')
       .selectAll('p')
       .data(data)
       .enter()
       .append('p')
-      .html(function(d,i) {return 'year ' + d.AverageCityMPG+ ' = ' + d.AverageHighwayMPG ;});
+      .html(function(d,i) {return 'year ' + d.year+ ' = ' + d.emission ;});
 
 }
 </script>
