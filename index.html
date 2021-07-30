@@ -6,12 +6,6 @@
     <style type="text/css">
     /* 13. Basic Styling with CSS */
 
-    /* Style the lines by removing the fill and applying a stroke */
-    .line { 
-        fill: none;
-        stroke: #ffab00;
-        stroke-width: 3;
-    }
 
     .overlay {
       fill: none;
@@ -126,18 +120,21 @@ svg.append("text")
 //     .ease(d3.easeSin) 
 //     .attr("stroke-dashoffset", 0);
 	
-// 7. d3's line generator
-var line = d3.line()
-    .x(function(d, i) { return x(d.year); }) // set the x values for the line generator
-    .y(function(d) { return y(d.WLD); }) // set the y values for the line generator 
 
-// 9. Append the path, bind the data, and call the line generator 
+// Add the data lines in line graph:	
+// Append path, bind the data, and call the line generator 
+// WORLD data in red
 svg.append("path")
-    .datum(data) // 10. Binds data to the line 
-    .attr("class", "line") // Assign a class for styling 
-    .attr("d", line); // 11. Calls the line generator 
-
-    
+    .datum(data) 
+    .attr("class", "line")
+    .attr("d", d3.line()
+	    .x(function(d) { return x(d.year); }) 
+	    .y(function(d) { return y(d.WLD); })  
+    .attr("fill", "none")
+    .attr("stroke", "#ff0000") 
+    .attr("stroke-width", 3);
+	  
+	  
 }
 </script>
 </body>
