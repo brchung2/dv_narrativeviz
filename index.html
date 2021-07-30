@@ -4,28 +4,21 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <style type="text/css">
-    /* 13. Basic Styling with CSS */
+	#tooltip {
+	    opacity: 0;
+	    position: absolute;
+	    text-align: center;
+	    width: 60px; height: 40px;
+	    background: white;
+	    border: 0px;
+	}
 
 
-    .overlay {
-      fill: none;
-      pointer-events: all;
-    }
-
-    .dot {
-        fill: #ffab00;
-        stroke: #fff;
-    }
-
-      .focus circle {
-      fill: none;
-      stroke: steelblue;
-    }
-
-</style>   
+    </style>   
     
 <body onload='init()'> 
-    
+	
+<div id="tooltip"></div>    
 
 <script>
 
@@ -44,7 +37,8 @@ var svg = d3.select("body")
     .append("g")
     .attr("transform",
     "translate(" + margin.left + "," + margin.top + ")");
-	
+
+
     
 const data = await d3.csv('emission3.csv');
     console.log(data);
@@ -121,6 +115,8 @@ svg.append("text")
 //     .attr("stroke-dashoffset", 0);
 	
 
+	
+var tooltip = d3.select("#tooltip");
 // Add the data lines in line graph:	
 // Append path, bind the data, and call the line generator 
 // WORLD data in red
@@ -132,7 +128,17 @@ svg.append("path")
 	    .y(function(d) { return y(d.WLD); }))  
     .attr("fill", "none")
     .attr("stroke", "#ff0000") 
-    .attr("stroke-width", 3);
+    .attr("stroke-width", 3)
+     // WHEN MOUSE OVER
+    .on("mouseover", function(d) {
+        tooltip.style("opacity", 1)
+               .style("left",(d3.event.pageX)+"px")
+               .style("top",(d3.event.pageY)+"px")
+               .html("Global emissions: "+d.WLD+ "Year: "+ d.year);
+    })
+// WHEN MOUSE LEAVES THE BAR, OPACITY SET BACK TO 0
+    .on("mouseout", function() { tooltip.style("opacity", 0) })
+	;
 
 // US data in blue
 svg.append("path")
@@ -159,66 +165,7 @@ svg.append("path")
 // 		})
 //       .on("mouseout", function() {  })
 
-	// Tool Tip
-	var tooltip = d3.select("body").append("div")
-	.attr("class", "tooltip")
-	.style("display", "none");    
 
-	var focus = svg.append("g")
-	.attr("class", "focus")
-	.style("display", "none");
-
-	focus.append("circle")
-	.attr("r", 5);
-
-	var tooltipDate = tooltip.append("div")
-	.attr("class", "tooltip-date");
-
-	// Emissions section    
-	var tooltipEmissions = tooltip.append("div");
-
-	tooltipEmissions.append("span")
-	.attr("class", "tooltip-title")
-	.text("Emissions: ");
-
-	var tooltipEmissionsValue = tooltipEmissions.append("span")
-	.attr("class", "tooltip-emissions");
-                 
-
-
-	svg.append("rect")
-	.attr("class", "overlay")
-	.attr("width", width)
-	.attr("height", height)
-	.on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
-	.on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
-	.on("mousemove", mousemove);   	
-	
-	
-    function mousemove() {
-	var x0 = x.invert(d3.mouse(this)[0]);
-	bisect = d3.bisector(function(a, b){ return a.year - b; }).right;
-	var i = bisect(data, x0);
-	var d0 = data[i - 1];
-	var d1 = data[i];
-	var d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-
-	var winWidth = $(window).width(); 
-	var winOffset = 0;
-
-	if(winWidth > 1000){
-	    winOffset = (winWidth - 1000) / 2;  
-	}
-
-// 	if (d.Year <= yearTresh) {
-	    focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-	    tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
-	    tooltip.select(".tooltip-date").text(d.year);
-	    tooltip.select(".tooltip-emissions").text(d.WLD);
-
-// 	}
-
-            } 
 	
 	
 	  
