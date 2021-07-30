@@ -23,7 +23,14 @@
 <script>
 
 async function init() {
+	const data = await d3.csv('emission3.csv');
+    	console.log(data);
+	
+	plotting(data);
+}
 
+
+function plotting(data) {
 // 2. Use the margin convention practice 
 var margin = {top: 50, right: 50, bottom: 50, left: 50}
   , width = 740 - margin.left - margin.right
@@ -40,8 +47,7 @@ var svg = d3.select("body")
 
 
     
-const data = await d3.csv('emission3.csv');
-    console.log(data);
+
 //     d3.select('body')
 //       .selectAll('p')
 //       .data(data)
@@ -168,8 +174,8 @@ svg.append("path")
 
 	
 	
-	  
-}
+}	  
+
 </script>
 </body>
 </html> 
