@@ -129,7 +129,7 @@ svg.append("path")
     .attr("class", "line")
     .attr("d", d3.line()
 	    .x(function(d) { return x(d.year); }) 
-	    .y(function(d) { return y(d.WLD); })  
+	    .y(function(d) { return y(d.WLD); }))  
     .attr("fill", "none")
     .attr("stroke", "#ff0000") 
     .attr("stroke-width", 3);
