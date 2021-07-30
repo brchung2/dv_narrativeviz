@@ -19,7 +19,7 @@
     
 <body onload='init()'> 
 	
-<div id="tooltip"></div>    
+<!-- <div id="tooltip"></div>     -->
 
 <script>
 
@@ -123,7 +123,18 @@ svg.append("text")
 	
 
 	
-var tooltip = d3.select("#tooltip");
+// var tooltip = d3.select("body").append("div").attr("class", "tooltip");
+var tooltip = d3.select("body").append("div")
+.attr("class", "tooltip")
+.style("display", "none");    
+
+var focus = svg.append("g")
+.attr("class", "focus")
+.style("display", "none");
+
+focus.append("circle")
+.attr("r", 4);
+	
 // Add the data lines in line graph:	
 // Append path, bind the data, and call the line generator 
 // WORLD data in red
@@ -136,15 +147,22 @@ svg.append("path")
     .attr("fill", "none")
     .attr("stroke", "#ff0000") 
     .attr("stroke-width", 3)
-     // WHEN MOUSE OVER
-    .on("mouseover", function(d) {
-        tooltip.style("opacity", 1)
-               .style("left",(d3.event.pageX)+"px")
-               .style("top",(d3.event.pageY)+"px")
-               .html("Global emissions: "+d.WLD+ "Year: "+ d.year);
-    })
-// WHEN MOUSE LEAVES THE BAR, OPACITY SET BACK TO 0
-    .on("mouseout", function() { tooltip.style("opacity", 0) })
+	
+        .on("mouseover", function (d) {
+            d3.select(this).style("fill", "#9f34eb");
+            tooltip
+                .style("left", d3.event.pageX - 10 + "px")
+                .style("top", d3.event.pageY + 20 + "px")
+                .style("display", "block")
+                .html("Total area under fire: " + d.WLD + " acres."
+                    + "</br>"
+                    + "Temperture: " + d.year + " &#8451;"
+                );
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).style("fill", '#ff0000');
+            tooltip.style("display", "none");
+        })
 	;
 
 // US data in blue
