@@ -133,6 +133,17 @@ svg.append("path")
     .attr("fill", "none")
     .attr("stroke", "#ff0000") 
     .attr("stroke-width", 3);
+
+// US data in blue
+svg.append("path")
+    .datum(data) 
+    .attr("class", "line")
+    .attr("d", d3.line()
+	    .x(function(d) { return x(d.year); }) 
+	    .y(function(d) { return y(d.USA); }))  
+    .attr("fill", "none")
+    .attr("stroke", "#004cff") 
+    .attr("stroke-width", 3);
 	  
 	  
 }
