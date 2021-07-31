@@ -35,8 +35,8 @@
 <!-- <div id="tooltip"></div>     -->
 
 <script>
-
-// load data
+	
+// =========================== Load data ===========================	
 async function init() {
 	const data = await d3.csv('emission3.csv');
     	console.log(data);
@@ -131,21 +131,6 @@ function plotting(data) {
 	.attr("stroke", "#004cff") 
 	.attr("stroke-width", 3);
 
-	// // Append circle point for each datapoint --> looks too busy. 65 circles on a line...
-	// svg.selectAll(".dot")
-	//     .data(data)
-	//   .enter().append("circle") 
-	//     .attr("class", "dot") 
-	//     .attr("cx", function(d) { return x(d.year); })
-	//     .attr("cy", function(d) { return y(d.WLD); })
-	//     .attr("r", 5)
-	//       .on("mouseover", function(a, b, c) { 
-	//   			console.log(a) 
-	//         this.attr('class', 'focus')
-	// 		})
-	//       .on("mouseout", function() {  })
-
-	
 	
 	// =========================== Tooltip ===========================
 	// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
@@ -204,6 +189,36 @@ function plotting(data) {
 	focus.select(".tooltip-year").text(formatValue(d.year));
 	focus.select(".tooltip-wld").text(formatValue(d.WLD));
 	}
+
+	// =========================== Gridlines ===========================
+	// gridlines in x axis function
+	function make_x_gridlines() {
+	    return d3.axisBottom(x)
+		.ticks(11)
+	}
+
+	// gridlines in y axis function
+	function make_y_gridlines() {
+	    return d3.axisLeft(y)
+		.ticks(11)
+	}
+
+	// add the X gridlines
+	svg.append("g")
+	    .attr("class", "grid")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(make_x_gridlines()
+		.tickSize(-height)
+		.tickFormat("")
+	    )
+
+	// add the Y gridlines
+	svg.append("g")
+	    .attr("class", "grid")
+	    .call(make_y_gridlines()
+		.tickSize(-width)
+		.tickFormat("")
+	    )
 
 	
 	
