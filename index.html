@@ -295,11 +295,6 @@ function plotting(data) {
 	
 	// Add annotation to the chart
 	const makeAnnotations = d3.annotation()
-	.type(type)
-	.accessors({ 
-	x: function(d){ return x(d.year)},
-	y: function(d){ return y(d.WLD) }
-        })
 	.annotations(annotations)
 
 	svg.append('g')
