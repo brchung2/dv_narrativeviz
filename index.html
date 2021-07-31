@@ -270,39 +270,48 @@ function plotting(data) {
 	    )
 	
 	// =========================== Highlight events on graph ===========================
-	var left = x(1973);
-	var right = x(1976); //one more day
-	var wid = right - left;
-	svg.append("rect")
-	.attr("x", left)
-	.attr("width", wid)
-	.attr("height", height)
 	
-	
-// 	var area = d3.svg.area()
-// 	.interpolate("basis")
-// 	.x(function(d) { return x(d.x_axis); })
-// 	.y0(height)
-// 	.y1(function(d) { return y(y.domain()[1]); });
-	
-// 	var drawD3Document = function(data) {
-// 	var area_data = [];
+	const annotations = [
 
-// 	data.forEach(function(d) {
-// 		d.x_axis = X_DATA_PARSE(d[X_AXIS_COLUMN]);
-// 		d.y_axis = Y_DATA_PARSE(d[Y_AXIS_COLUMN]);
+	{
+	  note: { 
+	    title: "Recession GDP -5.1%", 
+	    lineType: "none", 
+	    align: "middle",
+	    wrap: 150 //custom text wrapping
+	  },
+	  subject: {
+	    height: height - margin.top - margin.bottom,
+	    width: x(1973) - x(1976)
+	  },
+	  type: d3.annotationCalloutRect,
+	  y: margin.top,
+	  disable: ["connector"], // doesn't draw the connector
+	  //can pass "subject" "note" and "connector" as valid options
+	  dx: (x(1973) - x(1976))/2,
+	  data: { x: 1976}
+	}
+				]
+	
+	// Add annotation to the chart
+	const makeAnnotations = d3.annotation()
+	.annotations(annotations)
 
-// 		var x_date = (new Date(d.x_axis)).getTime();
-// 		if (x_date > (new Date('2012-04-13')).getTime() &&
-// 		x_date < (new Date('2012-04-17')).getTime()) {
-// 		area_data.push(d);
-//     				}
-		
-// 	svg.append("path")
-// 	.datum(area_data)
-// 	.attr("class", "area")
-// 	.attr("d", area);
-// 	});
+	svg.append('g')
+	.attr('class', 'annotation-group')
+	.call(makeAnnotations)
+	
+	
+// 	var left = x(1973);
+// 	var right = x(1976); //one more day
+// 	var wid = right - left;
+// 	svg.append("rect")
+// 	.attr("x", left)
+// 	.attr("width", wid)
+// 	.attr("height", height)
+	
+	
+
 	
 }	  
 
