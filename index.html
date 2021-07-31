@@ -271,44 +271,45 @@ function plotting(data) {
 	
 	// =========================== Annotations/Highlight events on graph ===========================
 	
-	const annotations = [
+// 	const annotations = [
 
-	{
-	  note: { 
-	    title: "Recession GDP -5.1%", 
-	    lineType: "none", 
-	    align: "middle",
-	    wrap: 150 //custom text wrapping
-	  },
-	  subject: {
-	    height: height,
-	    width: x(1973) - x(1976)
-	  },
-	  type: d3.annotationCalloutRect,
-	  y: margin.top,
-	  disable: ["connector"], // doesn't draw the connector
-	  //can pass "subject" "note" and "connector" as valid options
-	  dx: (x(1973) - x(1976))/2,
-	  data: { x: 1976}
-	}
-				]
+// 	{
+// 	  note: { 
+// 	    title: "Recession GDP -5.1%", 
+// 	    lineType: "none", 
+// 	    align: "middle",
+// 	    wrap: 150 //custom text wrapping
+// 	  },
+// 	  subject: {
+// 	    height: height,
+// 	    width: x(1973) - x(1976)
+// 	  },
+// 	  type: d3.annotationCalloutRect,
+// 	  y: margin.top,
+// 	  disable: ["connector"], // doesn't draw the connector
+// 	  //can pass "subject" "note" and "connector" as valid options
+// 	  dx: (x(1973) - x(1976))/2,
+// 	  data: { x: 1976}
+// 	}
+// 				]
 	
-	// Add annotation to the chart
-	const makeAnnotations = d3.annotation()
-	.annotations(annotations)
+// 	// Add annotation to the chart
+// 	const makeAnnotations = d3.annotation()
+// 	.annotations(annotations)
 
-	svg.append('g')
-	.attr('class', 'annotation-group')
-	.call(makeAnnotations)
+// 	svg.append('g')
+// 	.attr('class', 'annotation-group')
+// 	.call(makeAnnotations)
 	
 	
-// 	var left = x(1973);
-// 	var right = x(1976); //one more day
-// 	var wid = right - left;
-// 	svg.append("rect")
-// 	.attr("x", left)
-// 	.attr("width", wid)
-// 	.attr("height", height)
+	var left = x(1973);
+	var right = x(1976); //one more day
+	var wid = right - left;
+	svg.append("rect")
+	.attr("x", left)
+	.attr("width", wid)
+	.attr("height", height)
+	.style("opacity", 0.5)
 	
 	
 
