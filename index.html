@@ -27,6 +27,12 @@
         font-weight: bold;
 	}
 
+    .grid line {
+	    stroke: lightgrey;
+	    stroke-opacity: 0.7;
+	    shape-rendering: crispEdges;
+	}
+
 
     </style>   
     
@@ -205,11 +211,8 @@ function plotting(data) {
 
 	// add the X gridlines
 	svg.append("g")
-// 	    .attr("class", "grid")
+	    .attr("class", "grid")
 	    .attr("transform", "translate(0," + height + ")")
-	    .attr("stroke", 'lightgrey')
-	    .attr("stroke-opacity", 0.7)
-	    .attr("shape-rendering", 'crispEdges')
 	    .call(make_x_gridlines()
 		.tickSize(-height)
 		.tickFormat("")
