@@ -77,14 +77,12 @@ function plotting(data) {
 	
 	// Add X axis to svg
 	svg.append("g")
-	.attr("transform", "translate(" + margin.left+ "," + (height+margin.top) + ")")
+	.attr("transform", "translate( 0," + height + ")")
 	.call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
 	// Add label to X axis
 	svg.append("text")             
-	.attr("transform",
-	"translate(" + (width/2) + " ," + 
-	(height + margin.top) + ")")
+	.attr("transform", "translate(" + (width/2) + " ," + (height + margin.top) + ")")
 	.style("text-anchor", "middle")
 	.text("Year");
 
@@ -96,14 +94,14 @@ function plotting(data) {
 
 	// Add Y axis to svg
 	svg.append("g")
-	.attr("transform", "translate(" +margin.left+ "," +margin.top+ ")")
+	.attr("transform", "translate(0, 0)")
 	.call(d3.axisLeft(y).tickFormat(d3.format("d")));
 
 	// Add label to y axis
 	svg.append("text")
 	.attr("transform", "rotate(-90)")
+	.attr("x", 0 - (height / 2))
 	.attr("y", 0 - margin.left)
-	.attr("x",0 - (height / 2))
 	.attr("dy", "1em")
 	.style("text-anchor", "middle")
 	.text("CO2 Emissions - billion metric tons"); 
