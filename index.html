@@ -205,8 +205,12 @@ function plotting(data) {
 
 	// add the X gridlines
 	svg.append("g")
-	    .attr("class", "grid")
+// 	    .attr("class", "grid")
 	    .attr("transform", "translate(0," + height + ")")
+	    .attr("stroke", lightgrey)
+	    .attr("stroke-opacity", 0.7)
+	    .attr("shape-rendering", crispEdges)
+	    .attr("stroke-width", 0)
 	    .call(make_x_gridlines()
 		.tickSize(-height)
 		.tickFormat("")
