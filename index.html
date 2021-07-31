@@ -270,30 +270,39 @@ function plotting(data) {
 	    )
 	
 	// =========================== Highlight events on graph ===========================
-	var area = d3.svg.area()
-	.interpolate("basis")
-	.x(function(d) { return x(d.x_axis); })
-	.y0(height)
-	.y1(function(d) { return y(y.domain()[1]); });
+	var left = x(1973);
+	var right = x(1976); //one more day
+	var wid = right - left;
+	svg.append("rect")
+	.attr("x", left)
+	.attr("width", wid)
+	.attr("height", height)
 	
-	var drawD3Document = function(data) {
-	var area_data = [];
+	
+// 	var area = d3.svg.area()
+// 	.interpolate("basis")
+// 	.x(function(d) { return x(d.x_axis); })
+// 	.y0(height)
+// 	.y1(function(d) { return y(y.domain()[1]); });
+	
+// 	var drawD3Document = function(data) {
+// 	var area_data = [];
 
-	data.forEach(function(d) {
-		d.x_axis = X_DATA_PARSE(d[X_AXIS_COLUMN]);
-		d.y_axis = Y_DATA_PARSE(d[Y_AXIS_COLUMN]);
+// 	data.forEach(function(d) {
+// 		d.x_axis = X_DATA_PARSE(d[X_AXIS_COLUMN]);
+// 		d.y_axis = Y_DATA_PARSE(d[Y_AXIS_COLUMN]);
 
-		var x_date = (new Date(d.x_axis)).getTime();
-		if (x_date > (new Date('2012-04-13')).getTime() &&
-		x_date < (new Date('2012-04-17')).getTime()) {
-		area_data.push(d);
-    				}
+// 		var x_date = (new Date(d.x_axis)).getTime();
+// 		if (x_date > (new Date('2012-04-13')).getTime() &&
+// 		x_date < (new Date('2012-04-17')).getTime()) {
+// 		area_data.push(d);
+//     				}
 		
-	svg.append("path")
-	.datum(area_data)
-	.attr("class", "area")
-	.attr("d", area);
-	});
+// 	svg.append("path")
+// 	.datum(area_data)
+// 	.attr("class", "area")
+// 	.attr("d", area);
+// 	});
 	
 }	  
 
