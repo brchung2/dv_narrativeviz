@@ -83,7 +83,7 @@ function plotting(data) {
 
 	// Add label to X axis
 	svg.append("text")             
-	.attr("transform", "translate(" + (width/2) + " ," + (height + (margin.top/2)) + ")")
+	.attr("transform", "translate(" + (width/2) + " ," + (height + (margin.top)) + ")")
 	.attr("dy", "1em")
 	.style("text-anchor", "middle")
 	.text("Year");
@@ -113,8 +113,7 @@ function plotting(data) {
 
 	// WORLD data in red
 	svg.append("path")
-	.data(data) 
-	.attr("class", "line")
+	.datum(data) 
 	.attr("d", d3.line()
 	.x(function(d) { return x(d.year); }) 
 	.y(function(d) { return y(d.WLD); }))  
@@ -124,8 +123,7 @@ function plotting(data) {
 
 	// US data in blue
 	svg.append("path")
-	.data(data) 
-	.attr("class", "line")
+	.datum(data) 
 	.attr("d", d3.line()
 	.x(function(d) { return x(d.year); }) 
 	.y(function(d) { return y(d.USA); }))  
