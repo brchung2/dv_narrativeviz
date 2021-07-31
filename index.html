@@ -19,9 +19,24 @@
     }
 
     .tooltip {
-        fill: white;
-        stroke: #000;
-	background-color: white;
+        width: 94px;
+        padding: 4px 10px;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: absolute;
+        background-color: white;
+        font-size: 14px;
+        pointer-events: none;
+        -webkit-transition: all 0.25s;
+        -moz-transition: all 0.25s;
+        -ms-transition: all 0.25s;
+        -o-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+
+    .tooltip div {
+        margin: 3px 0;
     }
 
     .tooltip-year, .tooltip-wld {
@@ -144,7 +159,10 @@ function plotting(data) {
 	// =========================== Tooltip ===========================
 	// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
 
-
+    	var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("display", "none");
+	
 	var focus = svg.append("g")
 	.attr("class", "focus")
 	.style("display", "none");
@@ -152,38 +170,24 @@ function plotting(data) {
 	focus.append("circle")
 	.attr("r", 5);
 
-	focus.append("rect")
-	.attr("class", "tooltip")
-	.attr("width", 250)
-	.attr("height", 50)
-	.attr("x", 10)
-	.attr("y", -22)
-	.attr("rx", 4)
-	.attr("ry", 4);
+	var tooltipyear = tooltip.append("div")
+        .attr("class", "tooltip-year");
 
-	focus.append("text")
-	.attr("class", "tooltip-year")
-	.attr("x", 18)
-	.attr("y", -2);
+	var tooltiptext = tooltip.append("div");
+	tooltipLikes.append("span")
+// 		    .attr("class", "tooltip-title")
+		    .text("Global Emissions: ");
 
-	focus.append("text")
-	.attr("x", 18)
-	.attr("y", 18)
-	.text("Global Emissions: ");
+	var tooltipLikesValue = tooltiptext.append("span")
+            .attr("class", "tooltip-wld");
 
-	focus.append("text")
-	.attr("class", "tooltip-wld")
-	.attr("x", 60)
-	.attr("y", 18);
-
-	svg.append("rect")
-	.attr("class", "overlay")
-	.attr("width", width)
-	.attr("height", height)
-		
-	.on("mouseover", function() { focus.style("display", null); })
-	.on("mouseout", function() { focus.style("display", "none"); })
-	.on("mousemove", mousemove);
+        svg.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
+            .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
+            .on("mousemove", mousemove);
 
 	var formatValue = d3.format("d");
 
@@ -196,8 +200,9 @@ function plotting(data) {
 	d1 = data[i],
 	d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 	focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-	focus.select(".tooltip-year").text(formatValue(d.year));
-	focus.select(".tooltip-wld").text(formatValue(d.WLD));
+	tooltip.attr("style", "left:" + (x(d.year) + 64) + "px;top:" + y(d.WLD) + "px;");
+	tooltip.select(".tooltip-year").text(formatValue(d.year));
+	tooltip.select(".tooltip-wld").text(formatValue(d.WLD));
 	}
 
 	// =========================== Gridlines ===========================
