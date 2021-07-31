@@ -5,13 +5,26 @@
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 	
     <style type="text/css">
-	#tooltip {
-	    opacity: 0;
-	    position: absolute;
-	    text-align: center;
-	    width: 60px; height: 40px;
-	    background: white;
-	    border: 0px;
+     .overlay {
+        fill: none;
+        pointer-events: all;
+    }
+
+    .focus circle {
+        fill: steelblue;
+    }
+
+    .focus text {
+        font-size: 14px;
+    }
+
+    .tooltip {
+        fill: white;
+        stroke: #000;
+    }
+
+    .tooltip-date, .tooltip-likes {
+        font-weight: bold;
 	}
 
 
@@ -124,16 +137,16 @@ svg.append("text")
 
 	
 // var tooltip = d3.select("body").append("div").attr("class", "tooltip");
-var tooltip = d3.select("body").append("div")
-.attr("class", "tooltip")
-.style("display", "none");    
+// var tooltip = d3.select("body").append("div")
+// .attr("class", "tooltip")
+// .style("display", "none");    
 
-var focus = svg.append("g")
-.attr("class", "focus")
-.style("display", "none");
+// var focus = svg.append("g")
+// .attr("class", "focus")
+// .style("display", "none");
 
-focus.append("circle")
-.attr("r", 4);
+// focus.append("circle")
+// .attr("r", 4);
 	
 // Add the data lines in line graph:	
 // Append path, bind the data, and call the line generator 
@@ -148,22 +161,22 @@ svg.append("path")
     .attr("stroke", "#ff0000") 
     .attr("stroke-width", 3)
 	
-        .on("mouseover", function (d) {
-            focus.style("display", null);
-            tooltip.style("display", null);
+//         .on("mouseover", function (d) {
+//             focus.style("display", null);
+//             tooltip.style("display", null);
 	
-            tooltip
-                .style("left", d3.event.pageX - 10 + "px")
-                .style("top", d3.event.pageY + 20 + "px")
-                .html("Total area under fire: " + d.WLD + " acres."
-                    + "</br>"
-                    + "Temperture: " + d.year + " &#8451;"
-                );
-        })
-        .on("mouseout", function (d) {
-            focus.style("display", "none");
-            tooltip.style("display", "none");
-        })
+//             tooltip
+//                 .style("left", d3.event.pageX - 10 + "px")
+//                 .style("top", d3.event.pageY + 20 + "px")
+//                 .html("Total area under fire: " + d.WLD + " acres."
+//                     + "</br>"
+//                     + "Temperture: " + d.year + " &#8451;"
+//                 );
+//         })
+//         .on("mouseout", function (d) {
+//             focus.style("display", "none");
+//             tooltip.style("display", "none");
+//         })
 	;
 
 // US data in blue
@@ -191,6 +204,59 @@ svg.append("path")
 // 		})
 //       .on("mouseout", function() {  })
 
+// create tool tip from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
+ var focus = svg.append("g")
+    .attr("class", "focus")
+    .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 5);
+
+        focus.append("rect")
+            .attr("class", "tooltip")
+            .attr("width", 100)
+            .attr("height", 50)
+            .attr("x", 10)
+            .attr("y", -22)
+            .attr("rx", 4)
+            .attr("ry", 4);
+
+        focus.append("text")
+            .attr("class", "tooltip-date")
+            .attr("x", 18)
+            .attr("y", -2);
+
+        focus.append("text")
+            .attr("x", 18)
+            .attr("y", 18)
+            .text("Likes:");
+
+        focus.append("text")
+            .attr("class", "tooltip-likes")
+            .attr("x", 60)
+            .attr("y", 18);
+
+        svg.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+	var formatValue = d3.format("d");
+
+	
+        function mousemove() {
+            var x0 = x.invert(d3.mouse(this)[0]),
+                i = bisectDate(data, x0, 1),
+                d0 = data[i - 1],
+                d1 = data[i],
+                d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+            focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
+            focus.select(".tooltip-date").text(formatValue(d.year));
+            focus.select(".tooltip-likes").text(formatValue(d.WLD));
+        }
 
 	
 	
