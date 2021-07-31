@@ -169,21 +169,41 @@ function plotting(data) {
 
 	focus.append("circle")
 	.attr("r", 5);
-
+	
+	//== Tooltip content: 
+	// Year
 	var tooltipyear = tooltip.append("div")
         .attr("class", "tooltip-year");
-
+	
+	// Newline- "Global Emissions:"
 	var tooltiptext = tooltip.append("div");
 	tooltiptext.append("span")
 	.text("Global Emissions: ");
-
+	
+ 	// emission value
 	var tooltipvalue = tooltiptext.append("span")
         .attr("class", "tooltip-wld");
 	
-	var tooltipunits = tooltipvalue.append("span")
+	// units
+	var tooltipunits = tooltiptext.append("span")
         .text(" BMT")
 	.attr("class", "tooltip-wld");
+	
+	// Newline- "USA Emissions:"
+	var tooltiptextUSA = tooltip.append("div");
+         tooltiptextUSA.append("span")
+         .text("USA Emissions: ");
+	
+	// emission value
+         var tooltipusavalue = tooltiptextUSA.append("span")
+                .attr("class", "tooltip-wld");      
 
+	// units
+	var tooltipunits = tooltiptextUSA.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
+	
+	
         svg.append("rect")
             .attr("class", "overlay")
             .attr("width", width)
