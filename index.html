@@ -84,6 +84,7 @@ function plotting(data) {
 	// Add label to X axis
 	svg.append("text")             
 	.attr("transform", "translate(" + (width/2) + " ," + (height + (margin.top)) + ")")
+	.attr("dy", "1em")
 	.style("text-anchor", "middle")
 	.text("Year");
 
