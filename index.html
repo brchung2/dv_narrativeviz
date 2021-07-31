@@ -6,7 +6,7 @@
 
     <style type="text/css">
      .overlay {
-        fill: none;
+        fill: white;
         pointer-events: all;
     }
 
@@ -199,19 +199,19 @@ function plotting(data) {
 	}
 
 	// =========================== Gridlines ===========================
-	// gridlines in x axis function
+	// X axis gridllines (vertical)
 	function make_x_gridlines() {
 	    return d3.axisBottom(x)
 		.ticks(11)
 	}
 
-	// gridlines in y axis function
+	// Y axis gridllines (horizontal)
 	function make_y_gridlines() {
 	    return d3.axisLeft(y)
 		.ticks(11)
 	}
 
-	// add the X gridlines
+	// Add the X gridlines
 	svg.append("g")
 	    .attr("class", "grid")
 	    .attr("transform", "translate(0," + height + ")")
@@ -220,7 +220,7 @@ function plotting(data) {
 		.tickFormat("")
 	    )
 
-	// add the Y gridlines
+	// Add the Y gridlines
 	svg.append("g")
 	    .attr("class", "grid")
 	    .call(make_y_gridlines()
