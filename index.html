@@ -160,84 +160,6 @@ function plotting(data) {
 	.attr("stroke-width", 3);
 
 	
-	// =========================== Tooltip ===========================
-	// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
-
-    	var tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("display", "none");
-	
-	var focus = svg.append("g")
-	.attr("class", "focus")
-	.style("display", "none");
-
-	focus.append("circle")
-	.attr("r", 5);
-	
-	//== Tooltip content: 
-	// Year
-	var tooltipyear = tooltip.append("div")
-        .attr("class", "tooltip-year");
-	
-	// Newline- "Global Emissions:"
-	var tooltiptext = tooltip.append("div");
-	tooltiptext.append("span")
-	.text("Global Emissions: ");
-	
- 	// emission value
-	var tooltipvalue = tooltiptext.append("span")
-        .attr("class", "tooltip-wld");
-	
-	// units
-	var tooltipunits = tooltiptext.append("span")
-        .text(" BMT")
-	.attr("class", "tooltip-wld");
-	
-	// Newline- "USA Emissions:"
-	var tooltiptextUSA = tooltip.append("div");
-         tooltiptextUSA.append("span")
-         .text("USA Emissions: ");
-	
-	// emission value
-         var tooltipusavalue = tooltiptextUSA.append("span")
-                .attr("class", "tooltip-usa");      
-
-	// units
-	var tooltipunits = tooltiptextUSA.append("span")
-        .text(" BMT")
-	.attr("class", "tooltip-wld");
-	
-	
-        svg.append("rect")
-            .attr("class", "overlay")
-            .attr("width", width)
-            .attr("height", height)
-            .on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
-            .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
-            .on("mousemove", mousemove);
-
-	var formatValue = d3.format("d");
-	
-// 	var winWidth = $(window).width(); 
-//                 var winOffset = 0;
-                
-//                 if(winWidth > 1000){
-//                     winOffset = (winWidth - 1000) / 2;  
-//                 }
-
-	function mousemove() {
-		var x0 = x.invert(d3.mouse(this)[0]);
-		bisectYear = d3.bisector(function(a, b){ return a.year - b; }).right;
-		var i = bisectYear(data, x0),
-		d0 = data[i - 1],
-		d1 = data[i],
-		d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-		focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-		tooltip.attr("style", "left:" + (x(d.year) + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
-		tooltip.select(".tooltip-year").text(formatValue(d.year));
-		tooltip.select(".tooltip-wld").text(d.WLD)
-		tooltip.select(".tooltip-usa").text(d.USA);
-	}
 
 	// =========================== Gridlines ===========================
 	// X axis gridllines (vertical)
@@ -317,9 +239,86 @@ function plotting(data) {
 	.attr("y", 30)
 	.attr("text-anchor", "left")  
 	.style("font-size", "14px")
-	.text("1973: Oil Crisis");  
+	.text("1973-1975: Oil Crisis");  
+	
+	// =========================== Tooltip ===========================
+	// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
+
+    	var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("display", "none");
+	
+	var focus = svg.append("g")
+	.attr("class", "focus")
+	.style("display", "none");
+
+	focus.append("circle")
+	.attr("r", 5);
+	
+	//== Tooltip content: 
+	// Year
+	var tooltipyear = tooltip.append("div")
+        .attr("class", "tooltip-year");
+	
+	// Newline- "Global Emissions:"
+	var tooltiptext = tooltip.append("div");
+	tooltiptext.append("span")
+	.text("Global Emissions: ");
+	
+ 	// emission value
+	var tooltipvalue = tooltiptext.append("span")
+        .attr("class", "tooltip-wld");
+	
+	// units
+	var tooltipunits = tooltiptext.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
+	
+	// Newline- "USA Emissions:"
+	var tooltiptextUSA = tooltip.append("div");
+         tooltiptextUSA.append("span")
+         .text("USA Emissions: ");
+	
+	// emission value
+         var tooltipusavalue = tooltiptextUSA.append("span")
+                .attr("class", "tooltip-usa");      
+
+	// units
+	var tooltipunits = tooltiptextUSA.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
 	
 	
+        svg.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function() { focus.style("display", null); tooltip.style("display", null);  })
+            .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+	var formatValue = d3.format("d");
+	
+// 	var winWidth = $(window).width(); 
+//                 var winOffset = 0;
+                
+//                 if(winWidth > 1000){
+//                     winOffset = (winWidth - 1000) / 2;  
+//                 }
+
+	function mousemove() {
+		var x0 = x.invert(d3.mouse(this)[0]);
+		bisectYear = d3.bisector(function(a, b){ return a.year - b; }).right;
+		var i = bisectYear(data, x0),
+		d0 = data[i - 1],
+		d1 = data[i],
+		d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+		focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
+		tooltip.attr("style", "left:" + (x(d.year) + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
+		tooltip.select(".tooltip-year").text(formatValue(d.year));
+		tooltip.select(".tooltip-wld").text(d.WLD)
+		tooltip.select(".tooltip-usa").text(d.USA);
+	}
 
 	
 }	  
