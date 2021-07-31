@@ -19,7 +19,7 @@
     }
 
     .tooltip {
-        width: 130px;
+        width: 145px;
         padding: 4px 10px;
         border: 1px solid #aaa;
         border-radius: 4px;
@@ -177,8 +177,12 @@ function plotting(data) {
 	tooltiptext.append("span")
 	.text("Global Emissions: ");
 
-	var tooltipLikesValue = tooltiptext.append("span")
+	var tooltipvalue = tooltiptext.append("span")
         .attr("class", "tooltip-wld");
+	
+	var tooltipunits = tooltipvalue.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
 
         svg.append("rect")
             .attr("class", "overlay")
