@@ -269,7 +269,7 @@ function plotting(data) {
 		.tickFormat("")
 	    )
 	
-	// =========================== Highlight events on graph ===========================
+	// =========================== Annotations/Highlight events on graph ===========================
 	
 	const annotations = [
 
@@ -281,7 +281,7 @@ function plotting(data) {
 	    wrap: 150 //custom text wrapping
 	  },
 	  subject: {
-	    height: height - margin.top - margin.bottom,
+	    height: height,
 	    width: x(1973) - x(1976)
 	  },
 	  type: d3.annotationCalloutRect,
@@ -295,6 +295,11 @@ function plotting(data) {
 	
 	// Add annotation to the chart
 	const makeAnnotations = d3.annotation()
+	.type(type)
+	.accessors({ 
+	x: function(d){ return x(d.year)},
+	y: function(d){ return y(d.WLD) }
+        })
 	.annotations(annotations)
 
 	svg.append('g')
