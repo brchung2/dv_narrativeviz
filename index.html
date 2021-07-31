@@ -19,7 +19,7 @@
     }
 
     .tooltip {
-        width: 150px;
+        width: 130px;
         padding: 4px 10px;
         border: 1px solid #aaa;
         border-radius: 4px;
@@ -175,11 +175,10 @@ function plotting(data) {
 
 	var tooltiptext = tooltip.append("div");
 	tooltiptext.append("span")
-// 		    .attr("class", "tooltip-title")
-		    .text("Global Emissions: ");
+	.text("Global Emissions: ");
 
 	var tooltipLikesValue = tooltiptext.append("span")
-            .attr("class", "tooltip-wld");
+        .attr("class", "tooltip-wld");
 
         svg.append("rect")
             .attr("class", "overlay")
@@ -202,7 +201,7 @@ function plotting(data) {
 	focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
 	tooltip.attr("style", "left:" + (x(d.year) + 64) + "px;top:" + y(d.WLD) + "px;");
 	tooltip.select(".tooltip-year").text(formatValue(d.year));
-	tooltip.select(".tooltip-wld").text(formatValue(d.WLD));
+	tooltip.select(".tooltip-wld").text((d.WLD));
 	}
 
 	// =========================== Gridlines ===========================
