@@ -47,6 +47,18 @@ $(document).ready(function(){
             slideNumber = 4;
             slide(slideNumber, showCar, showTruck);
         }
+	    
+	if ($(this).is('#navItemFive')) {
+            $('#slideFive').removeClass('inactiveSlide');
+            slideNumber = 5;
+            slide(slideNumber, showCar, showTruck);
+        }
+	    
+	if ($(this).is('#navItemSix')) {
+            $('#slideSix').removeClass('inactiveSlide');
+            slideNumber = 6;
+            slide(slideNumber, showCar, showTruck);
+        }
 
     });   
     
