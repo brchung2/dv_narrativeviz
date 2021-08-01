@@ -77,7 +77,7 @@ function plotting(data) {
 	
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
-	var margin = {top: 30, right: 50, bottom: 50, left: 50}
+	var margin = {top: 30, right: 150, bottom: 50, left: 50}
 	, width = 740 - margin.left - margin.right
 	, height = 450 - margin.top - margin.bottom;
 
@@ -505,13 +505,13 @@ function plotting(data) {
 	
 	// =========================== Legend ===========================	
 	// legend keys
-	var keys = ["East Asia", "Europe", "North America"]
+	var keys = ["Global" ,"East Asia", "Europe", "North America"]
 
 	// set colors to legend keys
 	var color = d3.scaleOrdinal().domain(keys).range(d3.schemeSet2);
 
 	// Add one dot in the legend for each name.
-	svg.selectAll("mydots")
+	svg.selectAll("circle")
 	.data(keys)
 	.enter()
 	.append("circle")
@@ -521,7 +521,7 @@ function plotting(data) {
 	.style("fill", function (d) { return color(d) })
 
 	// Add one dot in the legend for each name.
-	svg.selectAll("mylabels")
+	svg.selectAll("label")
 	.data(keys)
 	.enter()
 	.append("text")
