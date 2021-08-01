@@ -332,17 +332,18 @@ $(document).ready(function(){
                     .attr("d", d3.line()
                         .x(function(d) { return x(d.Year) })
                         .y(function(d) { return y(d.co2Emissions) })
-                    )    
+                    );   
 
+		path
                 // Animate line
                 var pathLength = path.node().getTotalLength();
 
-                path.attr("stroke-dasharray", pathLength)
-                    .attr("stroke-dashoffset", pathLength)
-                    .transition()
-                    .duration(4000) 
-                    .ease(d3.easeSin) 
-                    .attr("stroke-dashoffset", 0);
+//                 path.attr("stroke-dasharray", pathLength)
+//                     .attr("stroke-dashoffset", pathLength)
+//                     .transition()
+//                     .duration(4000) 
+//                     .ease(d3.easeSin) 
+//                     .attr("stroke-dashoffset", 0);
 
 		// NA data
 		var pathNA = svg.append("path")
