@@ -39,7 +39,7 @@
         margin: 3px 0;
     }
 
-    .tooltip-year, .tooltip-wld, .tooltip-usa {
+    .tooltip-year, .tooltip-wld, .tooltip-usa, .tooltip-eu ,.tooltip-asia{
         font-weight: bold;
 	}
 
@@ -420,6 +420,22 @@ function plotting(data) {
         .text(" BMT")
 	.attr("class", "tooltip-wld");
 	
+	// ----------------
+	// Newline- "EU Emissions:"
+	var tooltiptextEU = tooltip.append("div");
+         tooltiptextEU.append("span")
+         .text("EU Emissions: ");
+	
+	// emission value
+         var tooltipeuvalue = tooltiptextEU.append("span")
+                .attr("class", "tooltip-eu");      
+
+	// units
+	var tooltipunits = tooltiptextEU.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
+	
+	// ----------------
 	// Newline- "USA Emissions:"
 	var tooltiptextUSA = tooltip.append("div");
          tooltiptextUSA.append("span")
@@ -434,6 +450,22 @@ function plotting(data) {
         .text(" BMT")
 	.attr("class", "tooltip-wld");
 	
+	// ----------------
+	// Newline- "Asia Emissions:"
+	var tooltiptextASIA = tooltip.append("div");
+         tooltiptextASIA.append("span")
+         .text("Asia Emissions: ");
+	
+	// emission value
+         var tooltipasiavalue = tooltiptextASIA.append("span")
+                .attr("class", "tooltip-asia");      
+
+	// units
+	var tooltipunits = tooltiptextASIA.append("span")
+        .text(" BMT")
+	.attr("class", "tooltip-wld");
+	
+	//======
 	
         svg.append("rect")
             .attr("class", "overlay")
@@ -463,7 +495,9 @@ function plotting(data) {
 		tooltip.attr("style", "left:" + (x(d.year) + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
 		tooltip.select(".tooltip-year").text(formatValue(d.year));
 		tooltip.select(".tooltip-wld").text(d.WLD)
-		tooltip.select(".tooltip-usa").text(d.NAC);
+		tooltip.select(".tooltip-eu").text(d.ECS)
+		tooltip.select(".tooltip-usa").text(d.NAC)
+		tooltip.select(".tooltip-asia").text(d.EAS);
 	}
 
 	
