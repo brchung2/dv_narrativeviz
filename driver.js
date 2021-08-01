@@ -375,7 +375,7 @@ $(document).ready(function(){
 
 		// NA data
 		var pathNA = svg.append("path")
-		.datum(data.filter(function(d) {return d.year <= yearthreshold;}))
+		.datum(data.filter(function(d) {return d.year <= 1975;}))
 		.attr("d", d3.line()
 		.x(function(d) { return x(d.year); }) 
 		.y(function(d) { return y(d.NAC); }))  
@@ -386,7 +386,7 @@ $(document).ready(function(){
 
 		 //  Europe data
                 var pathEU = svg.append("path")
-                    .datum(data.filter(function(d) {return d.year <= yearthreshold;}))
+                    .datum(data.filter(function(d) {return d.year <= 1975;}))
                     .attr("d", d3.line()
                     .x(function(d) { return x(d.year); }) 
                     .y(function(d) { return y(d.ECS); }))  
@@ -397,7 +397,7 @@ $(document).ready(function(){
 
             // Asia data
             var pathasia = svg.append("path")
-                .datum(data.filter(function(d) {return d.year <= yearthreshold;})) 
+                .datum(data.filter(function(d) {return d.year <= 1975;})) 
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.year); }) 
                 .y(function(d) { return y(d.EAS); }))  
@@ -405,11 +405,23 @@ $(document).ready(function(){
                 .attr("stroke", "#D033FF") 
                 .attr("stroke-width", 3);
                 
-		    
+		    pathNA;
+		    pathEU;
+		    pathasia;
+		 
+		    // NA line animted
+		 var pathNA_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.NAC); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#4CAF50")
+                    .attr("stroke-width", 3);       
 		// Animate  NA line
-                var pathlengthNA = pathNA.node().getTotalLength();
+                var pathlengthNA = pathNA_now.node().getTotalLength();
 
-                pathNA.attr("stroke-dasharray", pathlengthNA)
+                pathNA_now.attr("stroke-dasharray", pathlengthNA)
                     .attr("stroke-dashoffset", pathlengthNA)
                     .transition()
                     .duration(4000) 
@@ -425,6 +437,7 @@ $(document).ready(function(){
                     .duration(4000) 
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
+		    
 		// Animate asia line
                 var pathlengthasia = pathasia.node().getTotalLength();
 
