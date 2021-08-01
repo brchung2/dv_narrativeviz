@@ -601,70 +601,136 @@ $(document).ready(function(){
      
             }
 
-//             if(slideNum == 4) {
-
-//                 var pathOne = svg.append("path")
-//                 .datum(data.filter(function(d) {return d.Year <= 2007;}))
-//                 .attr("fill", "none")
-//                 .attr("stroke", "#4CAF50")
-//                 .attr("stroke-width", 2)
-//                 .attr("d", d3.line()
-//                     .x(function(d) { return x(d.Year) })
-//                     .y(function(d) { return y(d.co2Emissions) })
-//                 )
+            if(slideNum == 4) {
+		 var yearthreshold = 1999;
+		    
+                 var pathprev = svg.append("path")
+                .datum(data.filter(function(d) {return d.year <= 1994;}))
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.WLD); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#5daf4c") 
+                .attr("stroke-width", 3);
         
-//                 pathOne
+                pathprev
+		
+                var path = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1994 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.WLD); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#4CAF50")
+                    .attr("stroke-width", 3);   
 
-//                 var path = svg.append("path")
-//                     .datum(data.filter(function(d) {return d.Year >= 2007;}))
-//                     .attr("fill", "none")
-//                     .attr("stroke", "#4CAF50")
-//                     .attr("stroke-width", 2)
-//                     .attr("d", d3.line()
-//                         .x(function(d) { return x(d.Year) })
-//                         .y(function(d) { return y(d.co2Emissions) })
-//                     )    
+// 		path
+                // Animate line
+                var pathLength = path.node().getTotalLength();
 
-//                 // Animate line
-//                 var pathLength = path.node().getTotalLength();
+                path.attr("stroke-dasharray", pathLength)
+                    .attr("stroke-dashoffset", pathLength)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
 
-//                 path.attr("stroke-dasharray", pathLength)
-//                     .attr("stroke-dashoffset", pathLength)
-//                     .transition()
-//                     .duration(4000) 
-//                     .ease(d3.easeSin) 
-//                     .attr("stroke-dashoffset", 0);
+		// NA data
+		var pathNA = svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1994;}))
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.NAC); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#FF6A33") 
+		.attr("stroke-width", 3);
 
-//                 // Line for car mpg
-//                 var pathCar = svg.append("path")
-//                     .datum(data.filter(function(d) {return d.Year >= 1960;}))
-//                     .attr("class","carMPG")
-//                     .attr("display", "none")
-//                     .attr("fill", "none")
-//                     .attr("stroke", "#3cd0e4")
-//                     .attr("stroke-width", 2)
-//                     .attr("d", d3.line()
-//                         .x(function(d) { return x(d.Year) })
-//                         .y(function(d) { return y1(d.carMpg) })
-//                     )
 
-//                 pathCar
+		 //  Europe data
+                var pathEU = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year <= 1994;}))
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.year); }) 
+                    .y(function(d) { return y(d.ECS); }))  
+                    .attr("fill", "none")
+                    .attr("stroke", "#004cff") 
+                    .attr("stroke-width", 3);
 
-//                 // Line for truck mpg
-//                 var pathTruck = svg.append("path")
-//                     .datum(data.filter(function(d) {return d.Year >= 1960;}))
-//                     .attr("class","truckMPG")
-//                     .attr("display", "none")
-//                     .attr("fill", "none")
-//                     .attr("stroke", "#e62424")
-//                     .attr("stroke-width", 2)
-//                     .attr("d", d3.line()
-//                         .x(function(d) { return x(d.Year) })
-//                         .y(function(d) { return y1(d.truckMpg) })
-//                     )
 
-//                 pathTruck         
-//             }
+            // Asia data
+            var pathasia = svg.append("path")
+                .datum(data.filter(function(d) {return d.year <= 1994;})) 
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.EAS); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#D033FF") 
+                .attr("stroke-width", 3);
+                
+		    pathNA;
+		    pathEU;
+		    pathasia;
+		 
+		    // NA line animted
+		 var pathNA_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1994 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.NAC); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#FF6A33")
+                    .attr("stroke-width", 3);       
+		// Animate  NA line
+                var pathlengthNA = pathNA_now.node().getTotalLength();
+
+                pathNA_now.attr("stroke-dasharray", pathlengthNA)
+                    .attr("stroke-dashoffset", pathlengthNA)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+		    
+		//  EU line to animte
+		var pathEU_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1994 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.ECS); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#004cff")
+                    .attr("stroke-width", 3);  
+		    
+		// Animate  EU line
+                var pathlengthEU = pathEU_now.node().getTotalLength();
+
+                pathEU_now.attr("stroke-dasharray", pathlengthEU)
+                    .attr("stroke-dashoffset", pathlengthEU)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+		    
+		 
+		//  asia line to animte
+		var pathasia_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1994 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.EAS); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#D033FF")
+                    .attr("stroke-width", 3);  
+		// Animate asia line
+                var pathlengthasia = pathasia_now.node().getTotalLength();
+
+                pathasia_now.attr("stroke-dasharray", pathlengthasia)
+                    .attr("stroke-dashoffset", pathlengthasia)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+                     
+            }
            
 	// =========================== Annotations/Highlight events on graph ===========================
             if (slideNum >= 1)
