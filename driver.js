@@ -396,7 +396,6 @@ $(document).ready(function(){
                     .attr("stroke", "#4CAF50")
                     .attr("stroke-width", 3);   
 
-// 		path
                 // Animate line
                 var pathLength = path.node().getTotalLength();
 
@@ -622,7 +621,8 @@ $(document).ready(function(){
 		    .y(function(d) { return y(d.EAS); }))
                     .attr("fill", "none")
                     .attr("stroke", "#D033FF")
-                    .attr("stroke-width", 3);  
+                    .attr("stroke-width", 3); 
+		    
 		// Animate asia line
                 var pathlengthasia = pathasia_now.node().getTotalLength();
 
@@ -658,7 +658,6 @@ $(document).ready(function(){
                     .attr("stroke", "#4CAF50")
                     .attr("stroke-width", 3);   
 
-// 		path
                 // Animate line
                 var pathLength = path.node().getTotalLength();
 
@@ -921,7 +920,7 @@ $(document).ready(function(){
                     .attr("stroke", "#4CAF50")
                     .attr("stroke-width", 3);   
 
-// 		path
+
                 // Animate line
                 var pathLength = path.node().getTotalLength();
 
@@ -1370,18 +1369,11 @@ $(document).ready(function(){
                  d1 = data[i],
                  d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 
-//                 var winWidth = $(window).width(); 
-//                 var winOffset = 0;
-                
-//                 if(winWidth > 1000){
-//                     winOffset = (winWidth - 1000) / 2;  
-//                 }
 
                 if (d.year <= yearThresh) {
 			focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
 // 			tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
-// 			tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
-			tooltip.attr("style", "left:" + (x(d.year)+30) + "px;top:" + (y(d.WLD) + 220) + "px;");
+			tooltip.attr("style", "left:" + (x(d.year)+30) + "px;top:" + (y(d.WLD) + 200) + "px;");
 
 			tooltip.select(".tooltip-year").text(d.year);
 			tooltip.select(".tooltip-wld").text(d.WLD)
@@ -1397,6 +1389,5 @@ $(document).ready(function(){
 
         
     }
-    // END - Slide Function  -----------------------------------------------------------------------
-
+   
  });      
