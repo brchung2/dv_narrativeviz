@@ -269,7 +269,7 @@ function plotting(data) {
 	
 	svg.append("text")
 	.attr("x", x(1974))             
-	.attr("y", y(21))
+	.attr("y", y(20))
 	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
 	.text("Oil Crisis");  
@@ -285,9 +285,9 @@ function plotting(data) {
 	.style("fill", "#F5FF33");
 	
 	svg.append("text")
-	.attr("x", x(1983))             
-	.attr("y", y(24))
-	.attr("text-anchor", "left")  
+	.attr("x", x(1981))             
+	.attr("y", y(21))
+	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
 	.text("Oil Crisis 2");  
 	
@@ -303,9 +303,9 @@ function plotting(data) {
 	.style("fill", "#F5FF33");
 	
 	svg.append("text")
-	.attr("x", x(1994) + 4)             
+	.attr("x", x(1992))             
 	.attr("y", y(27))
-	.attr("text-anchor", "center")  
+	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
 	.text("Soviet Union Collapse")
 	.call(wrap, 60);  
@@ -321,11 +321,12 @@ function plotting(data) {
 	.style("fill", "#F5FF33");
 	
 	svg.append("text")
-	.attr("x", x(1999) + 4)             
-	.attr("y", 30)
-	.attr("text-anchor", "left")  
+	.attr("x", x(1998))             
+	.attr("y", y(29))
+	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
-	.text("Asian Financial Crisis");  
+	.text("Asian Financial Crisis")
+	.call(wrap, 80);  
 	
 	
 	var left = x(2008);
@@ -341,7 +342,7 @@ function plotting(data) {
 	svg.append("text")
 	.attr("x", x(2009) + 4)             
 	.attr("y", 30)
-	.attr("text-anchor", "left")  
+	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
 	.text("Global Financial Crisis & Kyoto Protocol");  
 	
@@ -358,7 +359,7 @@ function plotting(data) {
 	svg.append("text")
 	.attr("x", x(2016) + 4)             
 	.attr("y", 30)
-	.attr("text-anchor", "left")  
+	.attr("text-anchor", "middle")  
 	.style("font-size", "14px")
 	.text("Paris Climate Agreement");  
 	
