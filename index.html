@@ -27,7 +27,7 @@
     .focus text {
         font-size: 14px;
     }
-
+/* 
     .tooltip {
         width: 175px;
         padding: 4px 10px;
@@ -43,8 +43,36 @@
         -ms-transition: all 0.25s;
         -o-transition: all 0.25s;
         transition: all 0.25s;
-    }
+    } */
+.tooltip {
+  position: absolute;
+  z-index: $zindex-tooltip;
+  display: block;
+  margin: $tooltip-margin;
+  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  @include reset-text();
+  font-size: $tooltip-font-size;
+  // Allow breaking very long words so they don't overflow the tooltip's bounds
+  word-wrap: break-word;
+  opacity: 0;
 
+  &.show { opacity: $tooltip-opacity; }
+
+  .arrow {
+    position: absolute;
+    display: block;
+    width: $tooltip-arrow-width;
+    height: $tooltip-arrow-height;
+
+    &::before {
+      position: absolute;
+      content: "";
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+}
     .tooltip div {
         margin: 3px 0;
     }
