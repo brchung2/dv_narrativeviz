@@ -471,7 +471,133 @@ $(document).ready(function(){
             
 
             if(slideNum == 3) {
+		 var yearthreshold = 1994;
+		    
+                 var pathprev = svg.append("path")
+                .datum(data.filter(function(d) {return d.year <= 1983;}))
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.WLD); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#5daf4c") 
+                .attr("stroke-width", 3);
+        
+                pathprev
+		
+                var path = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1983 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.WLD); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#4CAF50")
+                    .attr("stroke-width", 3);   
+
+// 		path
+                // Animate line
+                var pathLength = path.node().getTotalLength();
+
+                path.attr("stroke-dasharray", pathLength)
+                    .attr("stroke-dashoffset", pathLength)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+
+		// NA data
+		var pathNA = svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1983;}))
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.NAC); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#FF6A33") 
+		.attr("stroke-width", 3);
+
+
+		 //  Europe data
+                var pathEU = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year <= 1983;}))
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.year); }) 
+                    .y(function(d) { return y(d.ECS); }))  
+                    .attr("fill", "none")
+                    .attr("stroke", "#004cff") 
+                    .attr("stroke-width", 3);
+
+
+            // Asia data
+            var pathasia = svg.append("path")
+                .datum(data.filter(function(d) {return d.year <= 1983;})) 
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.EAS); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#D033FF") 
+                .attr("stroke-width", 3);
                 
+		    pathNA;
+		    pathEU;
+		    pathasia;
+		 
+		    // NA line animted
+		 var pathNA_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1983 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.NAC); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#FF6A33")
+                    .attr("stroke-width", 3);       
+		// Animate  NA line
+                var pathlengthNA = pathNA_now.node().getTotalLength();
+
+                pathNA_now.attr("stroke-dasharray", pathlengthNA)
+                    .attr("stroke-dashoffset", pathlengthNA)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+		    
+		//  EU line to animte
+		var pathEU_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1983 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.ECS); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#004cff")
+                    .attr("stroke-width", 3);  
+		    
+		// Animate  EU line
+                var pathlengthEU = pathEU_now.node().getTotalLength();
+
+                pathEU_now.attr("stroke-dasharray", pathlengthEU)
+                    .attr("stroke-dashoffset", pathlengthEU)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+		    
+		 
+		//  asia line to animte
+		var pathasia_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1983 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.EAS); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#D033FF")
+                    .attr("stroke-width", 3);  
+		// Animate asia line
+                var pathlengthasia = pathasia_now.node().getTotalLength();
+
+                pathasia_now.attr("stroke-dasharray", pathlengthasia)
+                    .attr("stroke-dashoffset", pathlengthasia)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
      
             }
 
