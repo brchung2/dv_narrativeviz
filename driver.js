@@ -433,7 +433,7 @@ $(document).ready(function(){
                     .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= yearthreshold;}))
 		    .attr("d", d3.line()
 		    .x(function(d) { return x(d.year); })
-		    .y(function(d) { return y(d.NAC); }))
+		    .y(function(d) { return y(d.ECS); }))
                     .attr("fill", "none")
                     .attr("stroke", "#004cff")
                     .attr("stroke-width", 3);  
@@ -454,7 +454,7 @@ $(document).ready(function(){
                     .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= yearthreshold;}))
 		    .attr("d", d3.line()
 		    .x(function(d) { return x(d.year); })
-		    .y(function(d) { return y(d.NAC); }))
+		    .y(function(d) { return y(d.EAS); }))
                     .attr("fill", "none")
                     .attr("stroke", "#D033FF")
                     .attr("stroke-width", 3);  
