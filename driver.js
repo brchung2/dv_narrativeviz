@@ -21,7 +21,7 @@ $(document).ready(function(){
         $('svg').remove();
 
         // Set all slide details to not display
-        $('#slideDetails div').addClass('inactiveSlide'); 
+        $('#scenetext div').addClass('inactiveSlide'); 
 
         // Call slide function
         if ($(this).is('#navItemOne')) {
