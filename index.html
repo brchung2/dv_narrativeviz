@@ -77,9 +77,9 @@ function plotting(data) {
 	
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
-	var margin = {top: 30, right: 150, bottom: 50, left: 50}
+	var margin = {top: 50, right: 150, bottom: 50, left: 50}
 	, width = 800 - margin.left - margin.right
-	, height = 450 - margin.top - margin.bottom;
+	, height = 500 - margin.top - margin.bottom;
 
 	// add svg canvas dimensions
 	var svg = d3.select("body")
@@ -93,7 +93,7 @@ function plotting(data) {
 	// Add graph title
 	svg.append("text")
 	.attr("x", (width / 2))             
-	.attr("y", 0 - (margin.top + 10)) //margin.top / 2
+	.attr("y", 0 - (margin.top/2)) //margin.top / 2
 	.attr("text-anchor", "middle")  
 	.style("font-size", "16px")  
 	.text("Effect of Global Events on CO2 Emissions");
@@ -101,10 +101,10 @@ function plotting(data) {
 	// Add affordance
 	svg.append("text")
 	.attr("x", (width / 2))             
-	.attr("y", 0 - (margin.top / 2))
+	.attr("y", 0 - (margin.top / 2)-20)
 	.attr("text-anchor", "middle")  
 	.style("font-size", "10px")  
-	.text("Hover over line for more details");
+	.text("Hover over graph for more details");
 
 	// =========================== Axes ===========================
 	// Create X axis
@@ -536,8 +536,8 @@ function plotting(data) {
 	.data(keys)
 	.enter()
 	.append("text")
-	.attr("x", width + 30+ size*1.2)
-	.attr("y", function(d,i){ return 200 + i*(25) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+	.attr("x", width + 30+ size*1.4)
+	.attr("y", function(d,i){ return 200 + i*(25) + (size/2)+1}) // 100 is where the first dot appears. 25 is the distance between dots
 	.style("fill", function(d){ return color(d)})
 	.text(function(d){ return d})
 	.attr("text-anchor", "left")
