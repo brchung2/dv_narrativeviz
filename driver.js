@@ -1364,7 +1364,7 @@ $(document).ready(function(){
             function mousemove() {
                 var x0 = x.invert(d3.mouse(this)[0]);
                 bisectYear = d3.bisector(function(a, b){ return a.year - b; }).right;
-                var i = bisect(data, x0),
+                var i = bisectYear(data, x0),
                  d0 = data[i - 1],
                  d1 = data[i],
                  d = x0 - d0.year > d1.year - x0 ? d1 : d0;
