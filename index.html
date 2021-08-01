@@ -96,7 +96,7 @@ function plotting(data) {
 	.attr("y", 0 - (margin.top / 2))
 	.attr("text-anchor", "middle")  
 	.style("font-size", "16px")  
-	.text("Global CO2 Emissions units");
+	.text("Effect of Global Events on CO2 Emissions");
 
 	// =========================== Axes ===========================
 	// Create X axis
@@ -423,7 +423,7 @@ function plotting(data) {
 	// Newline- "USA Emissions:"
 	var tooltiptextUSA = tooltip.append("div");
          tooltiptextUSA.append("span")
-         .text("USA Emissions: ");
+         .text("N.Am Emissions: ");
 	
 	// emission value
          var tooltipusavalue = tooltiptextUSA.append("span")
@@ -463,7 +463,7 @@ function plotting(data) {
 		tooltip.attr("style", "left:" + (x(d.year) + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
 		tooltip.select(".tooltip-year").text(formatValue(d.year));
 		tooltip.select(".tooltip-wld").text(d.WLD)
-		tooltip.select(".tooltip-usa").text(d.USA);
+		tooltip.select(".tooltip-usa").text(d.NAC);
 	}
 
 	
