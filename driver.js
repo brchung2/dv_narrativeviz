@@ -1247,10 +1247,11 @@ $(document).ready(function(){
 //             var tooltipTruckValue = tooltipTruck.append("span")
 //                 .attr("class", "tooltip-truck");                 
 
-// =========================== Tooltip ===========================
+		// =========================== Tooltip ===========================
 		// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
 
-		var tooltip = d3.select("body").append("div")
+		var tooltip = d3.select("body")
+		.append("div")
 		.attr("class", "tooltip")
 		.style("display", "none");
 
@@ -1340,7 +1341,7 @@ $(document).ready(function(){
                 .on("mousemove", mousemove);   
 
             // Set year threshold
-            var yearThresh = 1975;
+//             var yearThresh = 1975;
 
             if (slideNum == 1) {
                 yearThresh = 1975;
@@ -1378,8 +1379,8 @@ $(document).ready(function(){
 
                 if (d.year <= yearThresh) {
 			focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-			// 		    tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
-			// 		    tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
+// 			tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
+// 			tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
 			tooltip.attr("style", "left:" + (x(d.year)+30) + "px;top:" + (y(d.WLD) + 220) + "px;");
 
 			tooltip.select(".tooltip-year").text(d.year);
