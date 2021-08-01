@@ -139,27 +139,45 @@ function plotting(data) {
 	// =========================== Add data lines to graph ===========================
 
 
-	// WORLD data in red
+	// WORLD data
 	svg.append("path")
 	.datum(data) 
 	.attr("d", d3.line()
 	.x(function(d) { return x(d.year); }) 
 	.y(function(d) { return y(d.WLD); }))  
 	.attr("fill", "none")
-	.attr("stroke", "#ff0000") 
+	.attr("stroke", "#33FF55") 
 	.attr("stroke-width", 3);
 
-	// US data in blue
+	// North america data
 	svg.append("path")
 	.datum(data) 
 	.attr("d", d3.line()
 	.x(function(d) { return x(d.year); }) 
-	.y(function(d) { return y(d.USA); }))  
+	.y(function(d) { return y(d.NAC); }))  
+	.attr("fill", "none")
+	.attr("stroke", "#FF6A33") 
+	.attr("stroke-width", 3);
+
+	// Europe data in blue
+	svg.append("path")
+	.datum(data) 
+	.attr("d", d3.line()
+	.x(function(d) { return x(d.year); }) 
+	.y(function(d) { return y(d.ECS); }))  
 	.attr("fill", "none")
 	.attr("stroke", "#004cff") 
 	.attr("stroke-width", 3);
-
 	
+	// Asia data
+	svg.append("path")
+	.datum(data) 
+	.attr("d", d3.line()
+	.x(function(d) { return x(d.year); }) 
+	.y(function(d) { return y(d.EAS); }))  
+	.attr("fill", "none")
+	.attr("stroke", "#D033FF") 
+	.attr("stroke-width", 3);
 
 	// =========================== Gridlines ===========================
 	// X axis gridllines (vertical)
@@ -223,7 +241,7 @@ function plotting(data) {
 // 	.attr('class', 'annotation-group')
 // 	.call(makeAnnotations)
 	
-	
+// 	source: https://stackoverflow.com/questions/24784302/wrapping-text-in-d3/24785497
 	function wrap(text, width) {
 	    text.each(function () {
 		var text = d3.select(this),
