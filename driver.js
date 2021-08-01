@@ -303,9 +303,10 @@ $(document).ready(function(){
                 .attr("fill", "none")
                 .attr("stroke", "#D033FF") 
                 .attr("stroke-width", 3);
-                
+		    
+              pathasia
                 }
-                pathasia
+                
 
     
             if(slideNum == 2) {
@@ -376,7 +377,7 @@ $(document).ready(function(){
                 .attr("stroke", "#D033FF") 
                 .attr("stroke-width", 3);
                 
-                }
+                
                 pathasia
             }
 
