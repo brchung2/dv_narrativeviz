@@ -549,7 +549,7 @@ $(document).ready(function(){
 				}
 			});
 		}
-				
+		// annotation 1		
 		var left = x(1973);
 		var right = x(1975);
 		var wid = right - left;
@@ -567,53 +567,111 @@ $(document).ready(function(){
 		.style("font-size", "14px")
 		.text("Oil Crisis");  
 		    
-//                 svg.append("path")
-//                 .attr("fill", "none")
-//                 .attr("stroke", "black")
-//                 .attr("stroke-dasharray", "5,5")
-//                 .attr("stroke-width", 1.5)
-//                 .attr("d", "M" + (x(1975)).toString() + " " + (height).toString() + "," + (x(1975)).toString() + " " + (0).toString() )
-
-//                 svg.append("text")
-//                     .attr("x", x(1975) + 4)             
-//                     .attr("y", 15)
-//                     .attr("text-anchor", "left")  
-//                     .style("font-size", "12px")
-//                     .text("CAFE Standards"); 
             }
 
-            // Annotation for Reagan freeze
+            // annotation 2
             if (slideNum >= 2){
-                svg.append("path")
-                    .attr("fill", "none")
-                    .attr("stroke", "black")
-                    .attr("stroke-dasharray", "5,5")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", "M" + (x(1986)).toString() + " " + (height).toString() + "," + (x(1986)).toString() + " " + (0).toString() )
+		var left = x(1979);
+		var right = x(1983);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
 
-                svg.append("text")
-                    .attr("x", x(1986) + 4)             
-                    .attr("y", 15)
-                    .attr("text-anchor", "left")  
-                    .style("font-size", "12px")
-                    .text("Reagan Freeze");  
+		svg.append("text")
+		.attr("x", x(1981))             
+		.attr("y", y(21))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Oil Crisis 2");  
             }
 
-            // Annotation for EISA standards
-            if (slideNum >= 3){
-                svg.append("path")
-                    .attr("fill", "none")
-                    .attr("stroke", "black")
-                    .attr("stroke-dasharray", "5,5")
-                    .attr("stroke-width", 1.5)
-                    .attr("d", "M" + (x(2007)).toString() + " " + (height).toString() + "," + (x(2007)).toString() + " " + (0).toString() )
 
-                svg.append("text")
-                    .attr("x", x(2007) + 4)             
-                    .attr("y", 15)
-                    .attr("text-anchor", "left")  
-                    .style("font-size", "12px")
-                    .text("EISA Standards");  
+            // annotation 3
+            if (slideNum >= 3){
+		var left = x(1990);
+		var right = x(1994);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
+
+		svg.append("text")
+		.attr("x", x(1992))             
+		.attr("y", y(27))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Soviet Union Collapse")
+		.call(wrap, 60);  
+            }
+		
+	    // annotation 4
+            if (slideNum >= 4){
+		var left = x(1997);
+		var right = x(1999);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
+
+		svg.append("text")
+		.attr("x", x(1998))             
+		.attr("y", y(29))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Asian Financial Crisis")
+		.call(wrap, 80);  
+            }
+		
+	    // annotation 5
+            if (slideNum >= 5){
+		var left = x(2008);
+		var right = x(2009);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
+
+		svg.append("text")
+		.attr("x", x(2008.5))             
+		.attr("y", y(27))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Global Financial Crisis & Kyoto Protocol")
+		.call(wrap, 80);  
+            }
+		
+	    // annotation 6
+            if (slideNum >= 6){
+		var left = x(2015);
+		var right = x(2016);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
+
+		svg.append("text")
+		.attr("x", x(2015.5))             
+		.attr("y", y(30))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Paris Climate Agreement")
+		.call(wrap, 80);  
             }
 
             // Set whether to show car and truck
