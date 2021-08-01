@@ -310,9 +310,9 @@ $(document).ready(function(){
 
     
             if(slideNum == 2) {
-		var yearthreshold_prev = yearthreshold;
+		var yearthreshold_prev = yearthreshold.valueOf();
                 var pathprev = svg.append("path")
-                .datum(data.filter(function(d) {return d.year <= 1975;}))
+                .datum(data.filter(function(d) {return d.year <= yearthreshold_prev;}))
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.year); }) 
                 .y(function(d) { return y(d.WLD); }))  
@@ -325,25 +325,24 @@ $(document).ready(function(){
 		var yearthreshold = 1983;
 		    
                 var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= 1983;}))
+                    .datum(data.filter(function(d) {return d.year >= yearthreshold_prev && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.WLD); }))
                     .attr("fill", "none")
                     .attr("stroke", "#4CAF50")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.year) })
-                        .y(function(d) { return y(d.WLD) })
-                    );   
+                    .attr("stroke-width", 3);   
 
-		path
+// 		path
                 // Animate line
                 var pathLength = path.node().getTotalLength();
 
-//                 path.attr("stroke-dasharray", pathLength)
-//                     .attr("stroke-dashoffset", pathLength)
-//                     .transition()
-//                     .duration(4000) 
-//                     .ease(d3.easeSin) 
-//                     .attr("stroke-dashoffset", 0);
+                path.attr("stroke-dasharray", pathLength)
+                    .attr("stroke-dashoffset", pathLength)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
 
 		// NA data
 		var pathNA = svg.append("path")
