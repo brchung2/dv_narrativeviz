@@ -1,8 +1,8 @@
 <html>
   <head>
     <script src = "https://d3js.org/d3.v5.min.js"></script>
-<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://brchung2.github.io/dv_narrativeviz/driver.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
 
@@ -10,8 +10,6 @@
         max-width: 1000px;
       }
       
-
-
       /* ============== Chart style ==========================*/
 
 
@@ -86,7 +84,7 @@
         margin-top: 0px;
       }
 
-      /* Tool Tip Style ------------------------------ */  
+      /* ============== Tooltip style ==========================*/
       .overlay {
           fill: none;
           pointer-events: all;
@@ -159,7 +157,7 @@
           }
 
 
-          li p {
+          li a {
             display: block;
             color: white;
             text-align: center;
@@ -168,7 +166,7 @@
             text-decoration: none;
           }
 
-          li p:hover {
+          li a:hover {
             background-color: #111;
           }
 
@@ -203,12 +201,12 @@
       </div> 
       <div id="nav">
         <ul>
-          <li><p class="navItem" id="navItemOne">1</p></li>
-          <li><p class="navItem" id="navItemTwo">2</p></li>
-          <li><p class="navItem" id="navItemThree">3</p></li>
-          <li><p class="navItem" id="navItemFour">4</p></li>
-          <li><p class="navItem" id="navItemFive">5</p></li>
-          <li><p class="navItem" id="navItemSix">6</p></li>
+          <li><a class="navItem" id="navItemOne">1</a></li>
+          <li><a class="navItem" id="navItemTwo">2</a></li>
+          <li><a class="navItem" id="navItemThree">3</a></li>
+          <li><a class="navItem" id="navItemFour">4</a></li>
+          <li><a class="navItem" id="navItemFive">5</a></li>
+          <li><a class="navItem" id="navItemSix">6</a></li>
         </ul>
       </div> 
       <div id="overview"></div> 
