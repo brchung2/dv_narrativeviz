@@ -423,7 +423,7 @@ $(document).ready(function(){
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
                 }
-            }
+            
 
             if(slideNum == 3) {
                 
