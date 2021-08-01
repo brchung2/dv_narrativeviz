@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
     // Initiate webpage with slide one
-    $('#slideOne').removeClass('inactiveSlide');
+    $('#scene1').removeClass('inactiveSlide');
     $('#navItemOne').addClass('active')
     slide(slideNumber, showCar, showTruck);
 
@@ -25,37 +25,37 @@ $(document).ready(function(){
 
         // Call slide function
         if ($(this).is('#navItemOne')) {
-            $('#slideOne').removeClass('inactiveSlide');
+            $('#scene1').removeClass('inactiveSlide');
             slideNumber = 1;
             slide(slideNumber, showCar, showTruck);
         }
 
         if ($(this).is('#navItemTwo')) {
-            $('#slideTwo').removeClass('inactiveSlide');
+            $('#scene2').removeClass('inactiveSlide');
             slideNumber = 2;
             slide(slideNumber, showCar, showTruck);
         }
 
         if ($(this).is('#navItemThree')) {
-            $('#slideThree').removeClass('inactiveSlide');
+            $('#scene3').removeClass('inactiveSlide');
             slideNumber = 3;
             slide(slideNumber, showCar, showTruck);
         }
 
         if ($(this).is('#navItemFour')) {
-            $('#slideFour').removeClass('inactiveSlide');
+            $('#scene4').removeClass('inactiveSlide');
             slideNumber = 4;
             slide(slideNumber, showCar, showTruck);
         }
 	    
 	if ($(this).is('#navItemFive')) {
-            $('#slideFive').removeClass('inactiveSlide');
+            $('#scene5').removeClass('inactiveSlide');
             slideNumber = 5;
             slide(slideNumber, showCar, showTruck);
         }
 	    
 	if ($(this).is('#navItemSix')) {
-            $('#slideSix').removeClass('inactiveSlide');
+            $('#scene6').removeClass('inactiveSlide');
             slideNumber = 6;
             slide(slideNumber, showCar, showTruck);
         }
