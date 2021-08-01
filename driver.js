@@ -206,8 +206,39 @@ $(document).ready(function(){
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .text("CO2 Emissions - billion metric tons"); 
+		
+	// =========================== Gridlines ===========================
+	// X axis gridllines (vertical)
+	function make_x_gridlines() {
+	    return d3.axisBottom(x)
+		.ticks(11)
+	}
 
-// =========================== Add data lines to graph ===========================
+	// Y axis gridllines (horizontal)
+	function make_y_gridlines() {
+	    return d3.axisLeft(y)
+		.ticks(11)
+	}
+
+	// Add the X gridlines
+	svg.append("g")
+	    .attr("class", "grid")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(make_x_gridlines()
+		.tickSize(-height)
+		.tickFormat("")
+	    )
+
+	// Add the Y gridlines
+	svg.append("g")
+	    .attr("class", "grid")
+	    .call(make_y_gridlines()
+		.tickSize(-width)
+		.tickFormat("")
+	    )
+		
+		
+	// =========================== Add data lines to graph ===========================
 
             if(slideNum == 1) {
                 
@@ -237,7 +268,7 @@ $(document).ready(function(){
                     .x(function(d) { return x(d.year); }) 
                     .y(function(d) { return y(d.NAC); }))  
                     .attr("fill", "none")
-                    .attr("stroke", "#5daf4c") 
+                    .attr("stroke", "#FF6A33") 
                     .attr("stroke-width", 3);
 
                 pathCar
@@ -249,7 +280,7 @@ $(document).ready(function(){
                     .x(function(d) { return x(d.year); }) 
                     .y(function(d) { return y(d.ECS); }))  
                     .attr("fill", "none")
-                    .attr("stroke", "#5daf4c") 
+                    .attr("stroke", "#004cff") 
                     .attr("stroke-width", 3);
 
                 pathTruck 
