@@ -270,8 +270,18 @@ $(document).ready(function(){
                     .attr("fill", "none")
                     .attr("stroke", "#FF6A33") 
                     .attr("stroke-width", 3);
+		    
+		// Animate  line
+                var pathLengthcar = pathCar.node().getTotalLength();
 
-                pathCar
+                pathCar.attr("stroke-dasharray", pathLengthcar)
+                    .attr("stroke-dashoffset", pathLengthcar)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
+
+//                 pathCar
 
                 //  Europe data
                 var pathTruck = svg.append("path")
