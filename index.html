@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -147,7 +148,7 @@
 	
 <div id="emissionViz"></div>
 <script>
-
+$(document).ready(function() {
 // =========================== Load data ===========================	
 async function init() {
 	const data = await d3.csv('emission3.csv');
@@ -696,7 +697,8 @@ function plotting(data) {
 	
 
 	}	
-}	  
+}
+}
 
 </script>
 	<div id="slideDetails">
