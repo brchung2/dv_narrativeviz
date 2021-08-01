@@ -134,103 +134,91 @@ $(document).ready(function(){
     
     // START - Slide Function  -----------------------------------------------------------------------
     function slide(slideNum, shwCar, shwTruck){
-        // Vars for viz sizing
-        var margin = {top: 30, right: 50, bottom: 50, left: 50};
-        var width = 740 - margin.left - margin.right;
-        var height = 450 - margin.top - margin.bottom;
+	// =========================== Chart Dimensions ===========================	
+	// set line chart dimensions
+	var margin = {top: 50, right: 150, bottom: 50, left: 50}
+	, width = 800 - margin.left - margin.right
+	, height = 500 - margin.top - margin.bottom;
 
-        // EMISSIONS VIZ ---------------------------------------------------------------------------------
-        // Add svg
-        var svg = d3.select("#emissionViz")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+	// add svg canvas dimensions
+	var svg = d3.select("#emissionViz")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
         // Create emissions viz
-        d3.csv("https://karlindye.github.io/emissions.csv").then(function(data) {
+        d3.csv("emission3.csv").then(function(data) {
 
-            // Add chart title
-            svg.append("text")
-                .attr("x", (width / 2))             
-                .attr("y", 0 - (margin.top / 2))
-                .attr("text-anchor", "middle")  
-                .style("font-size", "16px")  
-                .text("United States CO2 Emissions Per Capita");
+        // Add graph title
+        svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top/2)) //margin.top / 2
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px")  
+        .text("Annual CO2 Emissions 1960-2016");
 
-            // Add X axis
-            var x = d3.scaleLinear()
-                .domain([1960, 2016])
-                .range([ 0, width ]);
+        // Add affordance
+        svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2)+20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "10px")  
+        .text("Hover over graph for more details");
 
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
-            // text label for the x axis
-            svg.append("text")             
-                .attr("transform",
-                "translate(" + (width/2) + " ," + 
-                            (height + margin.top + 15) + ")")
-                .style("text-anchor", "middle")
-                .text("Year");
+        // =========================== Axes ===========================
+        // Create X axis
+        var x = d3.scaleLinear()
+        .domain([1960, 2017])
+        .range([ 0, width]);
 
-            // Add Y axis for Emissions
-            var y = d3.scaleLinear()
-                .domain([14, 23])
-                .range([ height, 0]);
+        // Add X axis to svg
+        svg.append("g")
+        .attr("transform", "translate( 0," + height + ")")
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
-            svg.append("g")
-                .call(d3.axisLeft(y));
+        // Add label to X axis
+        svg.append("text")             
+        .attr("transform", "translate(" + (width/2) + " ," + (height + (margin.top)) + ")")
+        // 	.attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Year");
 
-            // Text label for the Emissions y axis
-            svg.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin.left)
-                .attr("x",0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("CO2 Emissions (metric tons per capita)");     
 
-            // Add Y axis for MPG
-            var y1 = d3.scaleLinear()
-                .domain([11, 30])
-                .range([ height, 0]);
+        // Create Y axis
+        var y = d3.scaleLinear()
+        .domain([0, 35])
+        .range([ height, 0]);
 
-            svg.append("g")
-                .attr("class","axisMPG")
-                .attr("display", "none")
-                .attr("transform", "translate( " + width + ", 0 )")
-                .call(d3.axisRight(y1));
+        // Add Y axis to svg
+        svg.append("g")
+        .attr("transform", "translate(0, 0)")
+        .call(d3.axisLeft(y).tickFormat(d3.format("d")));
 
-            // Text label for the MPG y axis
-            svg.append("text")
-                .attr("class","axisMPG")
-                .attr("transform", "rotate(-90)")
-                .attr("display", "none")
-                .attr("y", width + 25)
-                .attr("x",0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("MPG (miles per gallon)"); 
+        // Add label to y axis
+        svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", 0 - (height / 2))
+        .attr("y", 0 - margin.left)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("CO2 Emissions - billion metric tons"); 
 
-           
-
-            // Lines for chart
+// =========================== Add data lines to graph ===========================
 
             if(slideNum == 1) {
                 
                 var path = svg.append("path")
-                .datum(data.filter(function(d) {return d.Year <= 1975;}))
-                .attr("fill", "none")
-                .attr("stroke", "#4CAF50")
-                .attr("stroke-width", 2)
+                .datum(data.filter(function(d) {return d.year <= 1975;}))
                 .attr("d", d3.line()
-                    .x(function(d) { return x(d.Year) })
-                    .y(function(d) { return y(d.co2Emissions) })
-                )
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.WLD); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#5daf4c") 
+                .attr("stroke-width", 3);
 
                 // Animate emissions line
                 var pathLength = path.node().getTotalLength();
@@ -242,234 +230,240 @@ $(document).ready(function(){
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
 
-                 // Line for car mpg
+                 //  North america data
                 var pathCar = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year <= 1975;}))
-                    .attr("class","carMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#3cd0e4")
-                    .attr("stroke-width", 2)
+                    .datum(data.filter(function(d) {return d.year <= 1975;}))
                     .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.carMpg) })
-                    )
+                    .x(function(d) { return x(d.year); }) 
+                    .y(function(d) { return y(d.NAC); }))  
+                    .attr("fill", "none")
+                    .attr("stroke", "#5daf4c") 
+                    .attr("stroke-width", 3);
 
                 pathCar
 
-                // Line for truck mpg
+                //  Europe data
                 var pathTruck = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year <= 1975;}))
-                    .attr("class","truckMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#e62424")
-                    .attr("stroke-width", 2)
+                    .datum(data.filter(function(d) {return d.year <= 1975;}))
                     .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.truckMpg) })
-                    )
+                    .x(function(d) { return x(d.year); }) 
+                    .y(function(d) { return y(d.ECS); }))  
+                    .attr("fill", "none")
+                    .attr("stroke", "#5daf4c") 
+                    .attr("stroke-width", 3);
 
                 pathTruck 
 
-
-            }
-
-            if(slideNum == 2) {
+            // Asia data
+            var pathasia = svg.append("path")
+                .datum(data.filter(function(d) {return d.year <= 1975;})) 
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.year); }) 
+                .y(function(d) { return y(d.EAS); }))  
+                .attr("fill", "none")
+                .attr("stroke", "#D033FF") 
+                .attr("stroke-width", 3);
                 
-                var pathOne = svg.append("path")
-                .datum(data.filter(function(d) {return d.Year <= 1975;}))
-                .attr("fill", "none")
-                .attr("stroke", "#4CAF50")
-                .attr("stroke-width", 2)
-                .attr("d", d3.line()
-                    .x(function(d) { return x(d.Year) })
-                    .y(function(d) { return y(d.co2Emissions) })
-                )
-        
-                pathOne
+                }
+                pathasia
 
-                var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= 1986;}))
-                    .attr("fill", "none")
-                    .attr("stroke", "#4CAF50")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y(d.co2Emissions) })
-                    )    
+            
 
-                // Animate line
-                var pathLength = path.node().getTotalLength();
-
-                path.attr("stroke-dasharray", pathLength)
-                    .attr("stroke-dashoffset", pathLength)
-                    .transition()
-                    .duration(4000) 
-                    .ease(d3.easeSin) 
-                    .attr("stroke-dashoffset", 0);
-
-                 // Line for car mpg
-                 var pathCar = svg.append("path")
-                 .datum(data.filter(function(d) {return d.Year <= 1986;}))
-                 .attr("class","carMPG")
-                 .attr("display", "none")
-                 .attr("fill", "none")
-                 .attr("stroke", "#3cd0e4")
-                 .attr("stroke-width", 2)
-                 .attr("d", d3.line()
-                     .x(function(d) { return x(d.Year) })
-                     .y(function(d) { return y1(d.carMpg) })
-                 )
-
-                pathCar
-
-                // Line for truck mpg
-                var pathTruck = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year <= 1986;}))
-                    .attr("class","truckMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#e62424")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.truckMpg) })
-                    )
-
-                pathTruck 
-            }
-
-            if(slideNum == 3) {
+//             if(slideNum == 2) {
                 
-                var pathOne = svg.append("path")
-                .datum(data.filter(function(d) {return d.Year <= 1986;}))
-                .attr("fill", "none")
-                .attr("stroke", "#4CAF50")
-                .attr("stroke-width", 2)
-                .attr("d", d3.line()
-                    .x(function(d) { return x(d.Year) })
-                    .y(function(d) { return y(d.co2Emissions) })
-                )
+//                 var pathOne = svg.append("path")
+//                 .datum(data.filter(function(d) {return d.Year <= 1975;}))
+//                 .attr("fill", "none")
+//                 .attr("stroke", "#4CAF50")
+//                 .attr("stroke-width", 2)
+//                 .attr("d", d3.line()
+//                     .x(function(d) { return x(d.Year) })
+//                     .y(function(d) { return y(d.co2Emissions) })
+//                 )
         
-                pathOne
+//                 pathOne
 
-                var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 1986 && d.Year <= 2007;}))
-                    .attr("fill", "none")
-                    .attr("stroke", "#4CAF50")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y(d.co2Emissions) })
-                    )    
+//                 var path = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= 1986;}))
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#4CAF50")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y(d.co2Emissions) })
+//                     )    
 
-                // Animate line
-                var pathLength = path.node().getTotalLength();
+//                 // Animate line
+//                 var pathLength = path.node().getTotalLength();
 
-                path.attr("stroke-dasharray", pathLength)
-                    .attr("stroke-dashoffset", pathLength)
-                    .transition()
-                    .duration(4000) 
-                    .ease(d3.easeSin) 
-                    .attr("stroke-dashoffset", 0);
+//                 path.attr("stroke-dasharray", pathLength)
+//                     .attr("stroke-dashoffset", pathLength)
+//                     .transition()
+//                     .duration(4000) 
+//                     .ease(d3.easeSin) 
+//                     .attr("stroke-dashoffset", 0);
 
+//                  // Line for car mpg
+//                  var pathCar = svg.append("path")
+//                  .datum(data.filter(function(d) {return d.Year <= 1986;}))
+//                  .attr("class","carMPG")
+//                  .attr("display", "none")
+//                  .attr("fill", "none")
+//                  .attr("stroke", "#3cd0e4")
+//                  .attr("stroke-width", 2)
+//                  .attr("d", d3.line()
+//                      .x(function(d) { return x(d.Year) })
+//                      .y(function(d) { return y1(d.carMpg) })
+//                  )
 
-                // Line for car mpg
-                var pathCar = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year <= 2007;}))
-                    .attr("class","carMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#3cd0e4")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.carMpg) })
-                    )
+//                 pathCar
 
-                pathCar
+//                 // Line for truck mpg
+//                 var pathTruck = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year <= 1986;}))
+//                     .attr("class","truckMPG")
+//                     .attr("display", "none")
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#e62424")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y1(d.truckMpg) })
+//                     )
 
-                // Line for truck mpg
-                var pathTruck = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year <= 2007;}))
-                    .attr("class","truckMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#e62424")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.truckMpg) })
-                    )
+//                 pathTruck 
+//             }
 
-                pathTruck     
-            }
-
-            if(slideNum == 4) {
-
-                var pathOne = svg.append("path")
-                .datum(data.filter(function(d) {return d.Year <= 2007;}))
-                .attr("fill", "none")
-                .attr("stroke", "#4CAF50")
-                .attr("stroke-width", 2)
-                .attr("d", d3.line()
-                    .x(function(d) { return x(d.Year) })
-                    .y(function(d) { return y(d.co2Emissions) })
-                )
+//             if(slideNum == 3) {
+                
+//                 var pathOne = svg.append("path")
+//                 .datum(data.filter(function(d) {return d.Year <= 1986;}))
+//                 .attr("fill", "none")
+//                 .attr("stroke", "#4CAF50")
+//                 .attr("stroke-width", 2)
+//                 .attr("d", d3.line()
+//                     .x(function(d) { return x(d.Year) })
+//                     .y(function(d) { return y(d.co2Emissions) })
+//                 )
         
-                pathOne
+//                 pathOne
 
-                var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 2007;}))
-                    .attr("fill", "none")
-                    .attr("stroke", "#4CAF50")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y(d.co2Emissions) })
-                    )    
+//                 var path = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year >= 1986 && d.Year <= 2007;}))
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#4CAF50")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y(d.co2Emissions) })
+//                     )    
 
-                // Animate line
-                var pathLength = path.node().getTotalLength();
+//                 // Animate line
+//                 var pathLength = path.node().getTotalLength();
 
-                path.attr("stroke-dasharray", pathLength)
-                    .attr("stroke-dashoffset", pathLength)
-                    .transition()
-                    .duration(4000) 
-                    .ease(d3.easeSin) 
-                    .attr("stroke-dashoffset", 0);
+//                 path.attr("stroke-dasharray", pathLength)
+//                     .attr("stroke-dashoffset", pathLength)
+//                     .transition()
+//                     .duration(4000) 
+//                     .ease(d3.easeSin) 
+//                     .attr("stroke-dashoffset", 0);
 
-                // Line for car mpg
-                var pathCar = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 1960;}))
-                    .attr("class","carMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#3cd0e4")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.carMpg) })
-                    )
 
-                pathCar
+//                 // Line for car mpg
+//                 var pathCar = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year <= 2007;}))
+//                     .attr("class","carMPG")
+//                     .attr("display", "none")
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#3cd0e4")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y1(d.carMpg) })
+//                     )
 
-                // Line for truck mpg
-                var pathTruck = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 1960;}))
-                    .attr("class","truckMPG")
-                    .attr("display", "none")
-                    .attr("fill", "none")
-                    .attr("stroke", "#e62424")
-                    .attr("stroke-width", 2)
-                    .attr("d", d3.line()
-                        .x(function(d) { return x(d.Year) })
-                        .y(function(d) { return y1(d.truckMpg) })
-                    )
+//                 pathCar
 
-                pathTruck         
-            }
+//                 // Line for truck mpg
+//                 var pathTruck = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year <= 2007;}))
+//                     .attr("class","truckMPG")
+//                     .attr("display", "none")
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#e62424")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y1(d.truckMpg) })
+//                     )
+
+//                 pathTruck     
+//             }
+
+//             if(slideNum == 4) {
+
+//                 var pathOne = svg.append("path")
+//                 .datum(data.filter(function(d) {return d.Year <= 2007;}))
+//                 .attr("fill", "none")
+//                 .attr("stroke", "#4CAF50")
+//                 .attr("stroke-width", 2)
+//                 .attr("d", d3.line()
+//                     .x(function(d) { return x(d.Year) })
+//                     .y(function(d) { return y(d.co2Emissions) })
+//                 )
+        
+//                 pathOne
+
+//                 var path = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year >= 2007;}))
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#4CAF50")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y(d.co2Emissions) })
+//                     )    
+
+//                 // Animate line
+//                 var pathLength = path.node().getTotalLength();
+
+//                 path.attr("stroke-dasharray", pathLength)
+//                     .attr("stroke-dashoffset", pathLength)
+//                     .transition()
+//                     .duration(4000) 
+//                     .ease(d3.easeSin) 
+//                     .attr("stroke-dashoffset", 0);
+
+//                 // Line for car mpg
+//                 var pathCar = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year >= 1960;}))
+//                     .attr("class","carMPG")
+//                     .attr("display", "none")
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#3cd0e4")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y1(d.carMpg) })
+//                     )
+
+//                 pathCar
+
+//                 // Line for truck mpg
+//                 var pathTruck = svg.append("path")
+//                     .datum(data.filter(function(d) {return d.Year >= 1960;}))
+//                     .attr("class","truckMPG")
+//                     .attr("display", "none")
+//                     .attr("fill", "none")
+//                     .attr("stroke", "#e62424")
+//                     .attr("stroke-width", 2)
+//                     .attr("d", d3.line()
+//                         .x(function(d) { return x(d.Year) })
+//                         .y(function(d) { return y1(d.truckMpg) })
+//                     )
+
+//                 pathTruck         
+//             }
            
 
             // Annotation for CAFE standards
