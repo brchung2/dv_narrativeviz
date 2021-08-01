@@ -249,6 +249,40 @@ $(document).ready(function(){
 		.tickFormat("")
 	    )
 		
+	// =========================== Legend ===========================	
+	// legend keys
+	var keys = ["Global", "Europe", "North America", "East Asia"];
+
+	// set colors to legend keys
+	var color = d3.scaleOrdinal().domain(keys).range(["#5daf4c", "#004cff", "#FF6A33", "#D033FF"]);
+
+	// Add one dot in the legend for each name.
+	var size = 10;
+	svg.selectAll("rectss")
+	.data(keys)
+	.enter()
+	.append("rect")
+	.attr("x", width + 30)
+	.attr("y", function(d,i){ return 200 + i*25} ) // 100 is where the first dot appears. 25 is the distance between dots
+	.attr("width", size)
+	.attr("height", size)
+	.style("fill", function(d){ return color(d)});
+	
+
+	// Add one dot in the legend for each name.
+	svg.selectAll("labels")
+	.data(keys)
+	.enter()
+	.append("text")
+	.attr("x", width + 30+ size*1.4)
+	.attr("y", function(d,i){ return 200 + i*(25) + (size/2)+1}) // 100 is where the first dot appears. 25 is the distance between dots
+	.style("fill", function(d){ return color(d)})
+	.text(function(d){ return d})
+	.attr("text-anchor", "left")
+	.style("alignment-baseline", "middle");
+		
+		
+		
 		
 	// =========================== Add data lines to graph ===========================
 
