@@ -1,76 +1,24 @@
-
-<!DOCTYPE html>
 <html>
-<head>
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://brchung2.github.io/dv_narrativeviz/driver.js"></script>
-<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+  <head>
+    <script src = "https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://karlindye.github.io/driver.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
-    <style type="text/css">
-	.content {
-	max-width: 1000px;
-/* 	margin: auto; */
-	}    
+    <style>
+      body{
+         background-color: whitesmoke;
+         font-family: 'Roboto', sans-serif;
+      }
 
-/* 	svg #emissionViz {
-	max-width: 800px;
-	margin: auto;
-	}
-	     */
-     .overlay {
-        fill: none;
-        pointer-events: all;
-    }
-
-    .focus circle {
-        fill: #5daf4c;
-    }
-
-    .focus text {
-        font-size: 14px;
-    }
-
-    .tooltip {
-        width: 175px;
-        padding: 4px 10px;
-        border: 1px solid #aaa;
-        border-radius: 4px;
-        box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        position: absolute;
-        background-color: white;
-        font-size: 14px;
-        pointer-events: none;
-        -webkit-transition: all 0.25s;
-        -moz-transition: all 0.25s;
-        -ms-transition: all 0.25s;
-        -o-transition: all 0.25s;
-        transition: all 0.25s;
-    }
-
-    .tooltip div {
-        margin: 1px 0;
-    }
-
-    .tooltip-year, .tooltip-wld, .tooltip-usa, .tooltip-eu ,.tooltip-asia{
-        font-weight: bold;
-	}
-
-    .grid line {
-	    stroke: lightgrey;
-	    stroke-opacity: 0.5;
-	    shape-rendering: crispEdges;
-	}
-	.grid path {
-	    stroke-width: 0;
-	}
-	    
-	.area {
-	fill: #EDE624;
-	}
-	 
-	/* Page buttons */
-	     ul {
+      .content {
+        max-width: 1000px;
+        margin: auto;
+      }
+      
+      /* Navigation Style ------------------------------ */
+      
+      ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -111,46 +59,148 @@
       .inactiveSlide {
         display: none;
       }
-    </style>   
-  </head>    
-<body> 
 
-<!-- Title -->
-<div class="content">
-<div id="titleSection">
-<h1>The History of CO2 Emissions</h1>
-<!-- paragraph text -->
-<p> Processes and technology that emit high amounts of greenhouse gases have become an insinuated fixture in our daily lives. 
-	The food we eat, the way we commute to the office or grocery store, the endless array of new tech gadgets 
-	that are always plugged in or charging, the amount of rubbish we produce that goes to landfill - these are all 
-	seemingly innocuous daily events that contribute to carbon emissions. A typical U.S. household has a carbon 
-	footprint of 48 metric tons CO2/yr. 
-</p>
-<br>
-<p>
-	This industrialization has been accompanied with climate change, resulting in more prevalent heat waves, 
-	wild fires, flash floods, rising sea levels or drying up of historic bodies of water, and natural disasters. 
-	It is reported that the world is on the precipice of an irreversible tipping point in climate change. So 
-	how did we arrive at this precarious state, when were the pivotal moments where carbon emissions decreased, 
-	and what can we expect our future to look like?
-</p>
-	
-</div> 
+      /* Chart Style ------------------------------ */
 
-<div id="nav">	
-<!-- add slideshow buttons --> 
+      svg text {
+        font-family: 'Roboto', sans-serif;
+      }
+
+      #emissionViz {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      /* Legend Style ------------------------------ */
+
+      #legend div {
+        padding: 10px 16px;
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+      }
+
+      #keyEmissions {
+        background-color: #4CAF50;
+      }
+
+      #keyCars {
+        background-color: #3cd0e4;
+        cursor: pointer;
+      }
+
+      #keyTrucks {
+        background-color: #e62424;
+        cursor: pointer;
+      }
+
+      #legend p {
+        color: white;
+        margin: 0px;
+        font-size: 12px;
+      }
+
+      #legend {
+        display: inline-block;
+      }
+
+      .keyInActive {
+        opacity: 0.5;
+      }
+
+      .keyInActive:hover {
+        opacity: 0.8;
+      }
+
+      .keyActive {
+        opacity: 1;
+      }
+
+      .keyActive:hover {
+        opacity: 0.8;
+      }
+
+      #legendTitle {
+        display: inline-block;
+      }
+
+      #legendTitle h3 {
+        margin-bottom: 0px;
+        margin-left: 235px;
+        margin-right: 20px;
+      }
+
+      #legendTitle p {
+        font-size: 10px;
+        margin-bottom: 10px;
+        margin-left: 235px;
+        margin-top: 0px;
+      }
+
+      /* Tool Tip Style ------------------------------ */  
+      .overlay {
+          fill: none;
+          pointer-events: all;
+      }
+
+      .focus circle {
+          fill: #4CAF50;
+      }
+
+      .tooltip {
+          width: 120px;
+          padding: 4px 10px;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+          position: absolute;
+          background-color: white;
+          font-size: 14px;
+          pointer-events: none;
+          -webkit-transition: all 0.25s;
+          -moz-transition: all 0.25s;
+          -ms-transition: all 0.25s;
+          -o-transition: all 0.25s;
+          transition: all 0.25s;
+      }
+
+      .tooltip div {
+          margin: 3px 0;
+      }
+
+      .tooltip-date, .tooltip-emissions, .tooltip-car, .tooltip-truck  {
+          font-weight: bold;
+      }
+
+     </style>
+  </head>
+  <body>
+    <div class="content">
+      <div id="titleSection">
+        <h1>United States Vehicle Fuel Economy Standards and CO2 Emissions</h1>
+        <p>Since the mid 1970's the United States has enacted a series of fuel economy standards. During the same period per capita CO2 emissions have trended downward.</p>
+      </div> 
+      <div id="nav">
         <ul>
-          <li><p class="navItem" id="navItemOne">1</p></li>
-          <li><p class="navItem" id="navItemTwo">2</p></li>
-          <li><p class="navItem" id="navItemThree">3</p></li>
-          <li><p class="navItem" id="navItemFour">4</p></li>
+          <li><p class="navItem" id="navItemOne">One</p></li>
+          <li><p class="navItem" id="navItemTwo">Two</p></li>
+          <li><p class="navItem" id="navItemThree">Three</p></li>
+          <li><p class="navItem" id="navItemFour">Four</p></li>
         </ul>
-</div> 
-	
-	
-<div id="emissionViz"></div>
-
-	<div id="slideDetails">
+      </div> 
+      <div id="overview"></div> 
+      <div id="emissionViz"></div>
+      <div id="vehicleViz"></div>
+      <div id="legendTitle">
+        <h3>Legend</h3>
+        <p>Click to Toggle</p>
+      </div>
+      <div id="legend">
+        <div id="keyEmissions"><p>Emissions</p></div>
+        <div id="keyCars" class="legendKey keyInActive"><p>Avg Car MPG</p></div>
+        <div id="keyTrucks" class="legendKey keyInActive"><p>Avg Truck MPG</p></div>
+      </div>
+      <div id="slideDetails">
         <div id ="slideOne" class="inactiveSlide">
           <h3>Corporate Average Fuel Economy (CAFE) Standards</h3>
           <p>
@@ -160,8 +210,43 @@
             new vehicle sales at the time.
           </p>
         </div>
-	</div>	
-</body>
-</html> 
- 
- 
+        <div id ="slideTwo" class="inactiveSlide">
+          <h3>Reagan Administration Lowers and Freezes Fuel Economy Standards</h3>
+          <p>
+            Between 1975 and 1985, average mileage per gallon increased signficantly for passenger-vehicles and light trucks. 
+            In the mid-1980s, however, Ford and General Motors lobbied the Reagan administration to lower the standard. NHTSA complied, setting a
+            26-mpg standard for 1986, prompting Chrysler Chairman Lee Iacocca to declare, “We are about to put up a tombstone: ‘Here lies America’s
+            energy policy.’"  
+          </p>
+        </div>
+        <div id ="slideThree" class="inactiveSlide">
+          <h3>Energy Independence and Security Act (EISA) Increases Standards</h3>
+          <p>
+            In December 2007, Congress passed the first changes to U.S. fuel-economy standards in nearly 20 years. A part of the larger Energy
+            Independence and Security Act (EISA) of 2007, the provision raised CAFE standards for cars, SUVs and pickups by about 40 percent—to 35 mpg by 2020.  
+          </p>
+        </div>
+        <div id ="slideFour" class="inactiveSlide">
+          <h3>Obama Administration Accelerates Standards</h3>
+          <p>
+            In April 2009, President Barack Obama accelerated the increase in the previous administration’s CAFE
+            standards. The joint Environmental Protection Agency/NHTSA rule applies to model years
+            2012 to 2016, requiring a fleet-wide average of 35.5 mpg by 2016. Increasing at an average of 
+            5 percent annually, most passenger cars must achieve 39 mpg, and light trucks 30 mpg, by 2016.
+            Accompanying this announcement was a memo expressing the intent to create emissions
+            standards for medium- and heavy-duty trucks, as required by the 2007 EISA 
+          </p>
+          <p>
+            In October 2010, the administration proposed a CAFE standard for medium- and heavy-duty
+            trucks. The program is projected to save 500 million barrels of oil and 250 million metric tons
+            of carbon dioxide emissions in the first five years. Covered vehicles would be separated by type
+            and fuel, with fuel-economy improvements of 20 percent for combination tractors, 10 percent for
+            gasoline trucks and vans, and 10 percent for diesel trucks and vans and all vocational vehicles (such as
+            dump trucks and cement mixers) by model year 2018.
+          </p>
+        </div>
+      </div> 
+    </div>
+  </body>  
+</html>  
+
