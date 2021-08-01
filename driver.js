@@ -325,7 +325,7 @@ $(document).ready(function(){
 		var yearthreshold = 1983;
 
                 var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= yearthreshold_prev && d.Year <= yearthreshold;}))
+                    .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= yearthreshold;}))
 			.attr("d", d3.line()
 			.x(function(d) { return x(d.year); }) 
 			.y(function(d) { return y(d.WLD); }))  
