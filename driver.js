@@ -416,7 +416,7 @@ $(document).ready(function(){
 		    .x(function(d) { return x(d.year); })
 		    .y(function(d) { return y(d.NAC); }))
                     .attr("fill", "none")
-                    .attr("stroke", "#4CAF50")
+                    .attr("stroke", "#FF6A33")
                     .attr("stroke-width", 3);       
 		// Animate  NA line
                 var pathlengthNA = pathNA_now.node().getTotalLength();
@@ -428,20 +428,40 @@ $(document).ready(function(){
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
 		    
+		//  EU line to animte
+		var pathEU_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.NAC); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#004cff")
+                    .attr("stroke-width", 3);  
+		    
 		// Animate  EU line
-                var pathlengthEU = pathEU.node().getTotalLength();
+                var pathlengthEU = pathEU_now.node().getTotalLength();
 
-                pathEU.attr("stroke-dasharray", pathlengthEU)
+                pathEU_now.attr("stroke-dasharray", pathlengthEU)
                     .attr("stroke-dashoffset", pathlengthEU)
                     .transition()
                     .duration(4000) 
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
 		    
+		 
+		//  asia line to animte
+		var pathasia_now = svg.append("path")
+                    .datum(data.filter(function(d) {return d.year >= 1975 && d.year <= yearthreshold;}))
+		    .attr("d", d3.line()
+		    .x(function(d) { return x(d.year); })
+		    .y(function(d) { return y(d.NAC); }))
+                    .attr("fill", "none")
+                    .attr("stroke", "#D033FF")
+                    .attr("stroke-width", 3);  
 		// Animate asia line
-                var pathlengthasia = pathasia.node().getTotalLength();
+                var pathlengthasia = pathasia_now.node().getTotalLength();
 
-                pathasia.attr("stroke-dasharray", pathlengthasia)
+                pathasia_now.attr("stroke-dasharray", pathlengthasia)
                     .attr("stroke-dashoffset", pathlengthasia)
                     .transition()
                     .duration(4000) 
