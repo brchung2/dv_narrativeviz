@@ -241,9 +241,9 @@ $(document).ready(function(){
 	// =========================== Add data lines to graph ===========================
 
             if(slideNum == 1) {
-                
+                var yearthreshold = 1975;
                 var path = svg.append("path")
-                .datum(data.filter(function(d) {return d.year <= 1975;}))
+                .datum(data.filter(function(d) {return d.year <= yearthreshold;}))
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.year); }) 
                 .y(function(d) { return y(d.WLD); }))  
@@ -262,7 +262,7 @@ $(document).ready(function(){
                     .attr("stroke-dashoffset", 0);
 
                  //  North america data
-                var pathCar = svg.append("path")
+                var pathNA = svg.append("path")
                     .datum(data.filter(function(d) {return d.year <= 1975;}))
                     .attr("d", d3.line()
                     .x(function(d) { return x(d.year); }) 
@@ -272,19 +272,18 @@ $(document).ready(function(){
                     .attr("stroke-width", 3);
 		    
 		// Animate  line
-                var pathLengthcar = pathCar.node().getTotalLength();
+                var pathlengthNA = pathNA.node().getTotalLength();
 
-                pathCar.attr("stroke-dasharray", pathLengthcar)
-                    .attr("stroke-dashoffset", pathLengthcar)
+                pathNA.attr("stroke-dasharray", pathlengthNA)
+                    .attr("stroke-dashoffset", pathlengthNA)
                     .transition()
                     .duration(4000) 
                     .ease(d3.easeSin) 
                     .attr("stroke-dashoffset", 0);
 
-//                 pathCar
 
                 //  Europe data
-                var pathTruck = svg.append("path")
+                var pathEU = svg.append("path")
                     .datum(data.filter(function(d) {return d.year <= 1975;}))
                     .attr("d", d3.line()
                     .x(function(d) { return x(d.year); }) 
@@ -293,7 +292,7 @@ $(document).ready(function(){
                     .attr("stroke", "#004cff") 
                     .attr("stroke-width", 3);
 
-                pathTruck 
+                pathEU 
 
             // Asia data
             var pathasia = svg.append("path")
