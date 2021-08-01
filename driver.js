@@ -323,21 +323,22 @@ $(document).ready(function(){
                 pathprev
 		
 		var yearthreshold = 1983;
-
+		    
                 var path = svg.append("path")
                     .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= 1983;}))
-			.attr("d", d3.line()
-			.x(function(d) { return x(d.year); }) 
-			.y(function(d) { return y(d.WLD); }))  
-			.attr("fill", "none")
-			.attr("stroke", "#5daf4c") 
-			.attr("stroke-width", 3);   
+                    .attr("fill", "none")
+                    .attr("stroke", "#4CAF50")
+                    .attr("stroke-width", 2)
+                    .attr("d", d3.line()
+                        .x(function(d) { return x(d.Year) })
+                        .y(function(d) { return y(d.co2Emissions) })
+                    )    
 
                 // Animate line
-                var pathlength = path.node().getTotalLength();
+                var pathLength = path.node().getTotalLength();
 
-                path.attr("stroke-dasharray", pathlength)
-                    .attr("stroke-dashoffset", pathlength)
+                path.attr("stroke-dasharray", pathLength)
+                    .attr("stroke-dashoffset", pathLength)
                     .transition()
                     .duration(4000) 
                     .ease(d3.easeSin) 
