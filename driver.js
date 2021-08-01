@@ -1378,8 +1378,9 @@ $(document).ready(function(){
 
                 if (d.year <= yearThresh) {
                     focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-		    tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
-//                     tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
+// 		    tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
+// 		    tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
+                    tooltip.attr("style", "left:" + (x(d.year) + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
                     
 // 		    		tooltip.select(".tooltip-date").text(d.Year);
 //                     tooltip.select(".tooltip-emissions").text(d.co2Emissions);
