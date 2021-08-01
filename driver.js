@@ -310,7 +310,8 @@ $(document).ready(function(){
 
     
             if(slideNum == 2) {
-		var yearthreshold_prev = yearthreshold.valueOf();
+		var yearthreshold_prev = JSON.parse(JSON.stringify(yearthreshold));
+		    
                 var pathprev = svg.append("path")
                 .datum(data.filter(function(d) {return d.year <= yearthreshold_prev;}))
                 .attr("d", d3.line()
@@ -512,60 +513,59 @@ $(document).ready(function(){
 //                 pathTruck         
 //             }
            
-
-            // Annotation for CAFE standards
+	// =========================== Annotations/Highlight events on graph ===========================
             if (slideNum >= 1)
             {
-			// 	source: https://stackoverflow.com/questions/24784302/wrapping-text-in-d3/24785497
-				function wrap(text, width) {
-					text.each(function () {
-						var text = d3.select(this),
-						words = text.text().split(/\s+/).reverse(),
-						word,
-						line = [],
-						lineNumber = 0,
-						lineHeight = 1.1, // ems
-						x = text.attr("x"),
-						y = text.attr("y"),
-						dy = 0, //parseFloat(text.attr("dy")),
-						tspan = text.text(null)
-							.append("tspan")
+		// source: https://stackoverflow.com/questions/24784302/wrapping-text-in-d3/24785497
+		function wrap(text, width) {
+			text.each(function () {
+				var text = d3.select(this),
+				words = text.text().split(/\s+/).reverse(),
+				word,
+				line = [],
+				lineNumber = 0,
+				lineHeight = 1.1, // ems
+				x = text.attr("x"),
+				y = text.attr("y"),
+				dy = 0, //parseFloat(text.attr("dy")),
+				tspan = text.text(null)
+					.append("tspan")
+					.attr("x", x)
+					.attr("y", y)
+					.attr("dy", dy + "em");
+			while (word = words.pop()) {
+				line.push(word);
+				tspan.text(line.join(" "));
+				if (tspan.node().getComputedTextLength() > width) {
+					line.pop();
+					tspan.text(line.join(" "));
+					line = [word];
+					tspan = text.append("tspan")
 							.attr("x", x)
 							.attr("y", y)
-							.attr("dy", dy + "em");
-					while (word = words.pop()) {
-						line.push(word);
-						tspan.text(line.join(" "));
-						if (tspan.node().getComputedTextLength() > width) {
-							line.pop();
-							tspan.text(line.join(" "));
-							line = [word];
-							tspan = text.append("tspan")
-									.attr("x", x)
-									.attr("y", y)
-									.attr("dy", ++lineNumber * lineHeight + dy + "em")
-									.text(word);
-							}
-						}
-					});
+							.attr("dy", ++lineNumber * lineHeight + dy + "em")
+							.text(word);
+					}
 				}
+			});
+		}
 				
-				var left = x(1973);
-				var right = x(1975);
-				var wid = right - left;
-				svg.append("rect")
-				.attr("x", left)
-				.attr("width", wid)
-				.attr("height", height)
-				.style("opacity", 0.5)
-				.style("fill", "#F5FF33");
+		var left = x(1973);
+		var right = x(1975);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
 
-				svg.append("text")
-				.attr("x", x(1974))             
-				.attr("y", y(20))
-				.attr("text-anchor", "middle")  
-				.style("font-size", "14px")
-				.text("Oil Crisis");  
+		svg.append("text")
+		.attr("x", x(1974))             
+		.attr("y", y(20))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Oil Crisis");  
 		    
 //                 svg.append("path")
 //                 .attr("fill", "none")
