@@ -153,7 +153,7 @@ $(document).ready(function(){
 	, height = 500 - margin.top - margin.bottom;
 
 	// add svg canvas dimensions
-	var svg = d3.select("#emissionViz")
+	var svg = d3.select("#mainsvgchart")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
@@ -167,7 +167,7 @@ $(document).ready(function(){
         // Add graph title
         svg.append("text")
         .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top/2)) //margin.top / 2
+        .attr("y", 0 - (margin.top/2))
         .attr("text-anchor", "middle")  
         .style("font-size", "18px")  
         .text("Annual CO2 Emissions 1960-2016");
