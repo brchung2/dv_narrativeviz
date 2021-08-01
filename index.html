@@ -135,9 +135,11 @@ li a:hover:not(.active) {
   <li><a href="#about">About</a></li>
 </ul>
 </div> 
+	
+	
+<div id="emissionViz"></div>
 <script>
 
-<div id="emissionViz"></div>
 // =========================== Load data ===========================	
 async function init() {
 	const data = await d3.csv('emission3.csv');
