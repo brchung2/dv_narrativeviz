@@ -1190,64 +1190,147 @@ $(document).ready(function(){
 		.call(wrap, 80);  
             }
 
-            // Set whether to show car and truck
+//             // Set whether to show car and truck
 
-            if (shwCar == 1) {
-                $(".carMPG").attr("display",null);
-                $(".axisMPG").attr("display",null);
-            }
+//             if (shwCar == 1) {
+//                 $(".carMPG").attr("display",null);
+//                 $(".axisMPG").attr("display",null);
+//             }
 
-            if (shwTruck == 1) {
-                $(".truckMPG").attr("display",null);
-                $(".axisMPG").attr("display",null);
-            }
+//             if (shwTruck == 1) {
+//                 $(".truckMPG").attr("display",null);
+//                 $(".axisMPG").attr("display",null);
+//             }
      
-            // Tool Tip
-            var tooltip = d3.select("body").append("div")
-                .attr("class", "tooltip")
-                .style("display", "none");    
+//             // Tool Tip
+//             var tooltip = d3.select("body").append("div")
+//                 .attr("class", "tooltip")
+//                 .style("display", "none");    
 
-            var focus = svg.append("g")
-                .attr("class", "focus")
-                .style("display", "none");
+//             var focus = svg.append("g")
+//                 .attr("class", "focus")
+//                 .style("display", "none");
 
-            focus.append("circle")
-                .attr("r", 5);
+//             focus.append("circle")
+//                 .attr("r", 5);
 
-            var tooltipDate = tooltip.append("div")
-                .attr("class", "tooltip-date");
+//             var tooltipDate = tooltip.append("div")
+//                 .attr("class", "tooltip-date");
 
-            // Emissions section    
-            var tooltipEmissions = tooltip.append("div");
+//             // Emissions section    
+//             var tooltipEmissions = tooltip.append("div");
 
-            tooltipEmissions.append("span")
-                .attr("class", "tooltip-title")
-                .text("Emissions: ");
+//             tooltipEmissions.append("span")
+//                 .attr("class", "tooltip-title")
+//                 .text("Emissions: ");
 
-            var tooltipEmissionsValue = tooltipEmissions.append("span")
-                .attr("class", "tooltip-emissions");
+//             var tooltipEmissionsValue = tooltipEmissions.append("span")
+//                 .attr("class", "tooltip-emissions");
                 
-            // Car MPG section    
-            var tooltipCar = tooltip.append("div");
+//             // Car MPG section    
+//             var tooltipCar = tooltip.append("div");
 
-            tooltipCar.append("span")
-                .attr("class", "tooltip-title")
-                .text("Car MPG: ");
+//             tooltipCar.append("span")
+//                 .attr("class", "tooltip-title")
+//                 .text("Car MPG: ");
 
-            var tooltipCarValue = tooltipCar.append("span")
-                .attr("class", "tooltip-car");      
+//             var tooltipCarValue = tooltipCar.append("span")
+//                 .attr("class", "tooltip-car");      
 
-            // Truck MPG section    
-            var tooltipTruck = tooltip.append("div");
+//             // Truck MPG section    
+//             var tooltipTruck = tooltip.append("div");
 
-            tooltipTruck.append("span")
-                .attr("class", "tooltip-title")
-                .text("Truck MPG: ");
+//             tooltipTruck.append("span")
+//                 .attr("class", "tooltip-title")
+//                 .text("Truck MPG: ");
 
-            var tooltipTruckValue = tooltipTruck.append("span")
-                .attr("class", "tooltip-truck");                 
+//             var tooltipTruckValue = tooltipTruck.append("span")
+//                 .attr("class", "tooltip-truck");                 
 
+// =========================== Tooltip ===========================
+		// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
 
+		var tooltip = d3.select("body").append("div")
+		.attr("class", "tooltip")
+		.style("display", "none");
+
+		var focus = svg.append("g")
+		.attr("class", "focus")
+		.style("display", "none");
+
+		focus.append("circle")
+		.attr("r", 5);
+
+		//==== Tooltip content: 
+		// Year
+		var tooltipyear = tooltip.append("div")
+		.attr("class", "tooltip-year");
+
+		//== Newline- "Global Emissions:"
+		var tooltiptext = tooltip.append("div");
+		
+		tooltiptext.append("span")
+		.text("Global Emissions: ");
+
+		// emission value
+		var tooltipvalue = tooltiptext.append("span")
+		.attr("class", "tooltip-wld");
+
+		// units
+		var tooltipunits = tooltiptext.append("span")
+		.text(" BMT")
+		.attr("class", "tooltip-wld");
+
+		// ----------------
+		// Newline- "EU Emissions:"
+		var tooltiptextEU = tooltip.append("div");
+		
+		 tooltiptextEU.append("span")
+		 .text("EU Emissions: ");
+
+		// emission value
+		 var tooltipeuvalue = tooltiptextEU.append("span")
+			.attr("class", "tooltip-eu");      
+
+		// units
+		var tooltipunits = tooltiptextEU.append("span")
+		.text(" BMT")
+		.attr("class", "tooltip-wld");
+
+		// ----------------
+		// Newline- "USA Emissions:"
+		var tooltiptextUSA = tooltip.append("div");
+		
+		 tooltiptextUSA.append("span")
+		 .text("N.Am Emissions: ");
+
+		// emission value
+		 var tooltipusavalue = tooltiptextUSA.append("span")
+			.attr("class", "tooltip-usa");      
+
+		// units
+		var tooltipunits = tooltiptextUSA.append("span")
+		.text(" BMT")
+		.attr("class", "tooltip-wld");
+
+		// ----------------
+		// Newline- "Asia Emissions:"
+		var tooltiptextASIA = tooltip.append("div");
+		
+		 tooltiptextASIA.append("span")
+		 .text("Asia Emissions: ");
+
+		// emission value
+		 var tooltipasiavalue = tooltiptextASIA.append("span")
+			.attr("class", "tooltip-asia");      
+
+		// units
+		var tooltipunits = tooltiptextASIA.append("span")
+		.text(" BMT")
+		.attr("class", "tooltip-wld");
+
+		//======
+		
             svg.append("rect")
                 .attr("class", "overlay")
                 .attr("width", width)
@@ -1257,28 +1340,34 @@ $(document).ready(function(){
                 .on("mousemove", mousemove);   
 
             // Set year threshold
-            var yearTresh = 1975
+            var yearThresh = 1975;
 
             if (slideNum == 1) {
-                yearTresh = 1975;
+                yearThresh = 1975;
             }   
             if (slideNum == 2) {
-                yearTresh = 1986;
+                yearThresh = 1983;
             } 
             if (slideNum == 3) {
-                yearTresh = 2007;
+                yearThresh = 1994;
             } 
             if (slideNum == 4) {
-                yearTresh = 2016;
+                yearThresh = 1999;
+            }  
+	    if (slideNum == 5) {
+                yearThresh = 2009;
+            }  
+	    if (slideNum == 6) {
+                yearThresh = 2016;
             }  
 
             function mousemove() {
                 var x0 = x.invert(d3.mouse(this)[0]);
-                bisect = d3.bisector(function(a, b){ return a.Year - b; }).right;
-                var i = bisect(data, x0);
-                var d0 = data[i - 1];
-                var d1 = data[i];
-                var d = x0 - d0.Year > d1.Year - x0 ? d1 : d0;
+                bisectYear = d3.bisector(function(a, b){ return a.year - b; }).right;
+                var i = bisect(data, x0),
+                 d0 = data[i - 1],
+                 d1 = data[i],
+                 d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 
                 var winWidth = $(window).width(); 
                 var winOffset = 0;
@@ -1287,13 +1376,22 @@ $(document).ready(function(){
                     winOffset = (winWidth - 1000) / 2;  
                 }
 
-                if (d.Year <= yearTresh) {
-                    focus.attr("transform", "translate(" + x(d.Year) + "," + y(d.co2Emissions) + ")");
-                    tooltip.attr("style", "left:" + (x(d.Year) + winOffset + 64) + "px;top:" + (y(d.co2Emissions) + 90) + "px;");
-                    tooltip.select(".tooltip-date").text(d.Year);
-                    tooltip.select(".tooltip-emissions").text(d.co2Emissions);
-                    tooltip.select(".tooltip-car").text(d.carMpg);
-                    tooltip.select(".tooltip-truck").text(d.truckMpg);
+                if (d.year <= yearThresh) {
+                    focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
+// 		    tooltip.attr("style", "left:" + d3.event.pageX   + "px;top:" + d3.event.pageY  + "px;");
+                    tooltip.attr("style", "left:" + (x(d.year) + winOffset + 64) + "px;top:" + (y(d.WLD) + 90) + "px;");
+                    
+// 		    		tooltip.select(".tooltip-date").text(d.Year);
+//                     tooltip.select(".tooltip-emissions").text(d.co2Emissions);
+//                     tooltip.select(".tooltip-car").text(d.carMpg);
+//                     tooltip.select(".tooltip-truck").text(d.truckMpg);
+					
+					tooltip.select(".tooltip-year").text(d.year);
+					tooltip.select(".tooltip-wld").text(d.WLD)
+					tooltip.select(".tooltip-eu").text(d.ECS)
+					tooltip.select(".tooltip-usa").text(d.NAC)
+					tooltip.select(".tooltip-asia").text(d.EAS);
+
                 }
 
             }    
