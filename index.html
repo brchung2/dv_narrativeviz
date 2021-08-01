@@ -547,12 +547,12 @@ function plotting(data) {
 
 	var formatValue = d3.format("d");
 	
-// 	var winWidth = $(window).width(); 
-//                 var winOffset = 0;
+	var winWidth = $(window).width(); 
+                var winOffset = 0;
                 
-//                 if(winWidth > 1000){
-//                     winOffset = (winWidth - 1000) / 2;  
-//                 }
+                if(winWidth > 1000){
+                    winOffset = (winWidth - 1000) / 2;  
+                }
 
 	function mousemove() {
 		var x0 = x.invert(d3.mouse(this)[0]);
@@ -562,7 +562,7 @@ function plotting(data) {
 		d1 = data[i],
 		d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 		focus.attr("transform", "translate(" + x(d.year) + "," + y(d.WLD) + ")");
-		tooltip.attr("style", "left:" + (x(d.year) + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
+		tooltip.attr("style", "left:" + (x(d.year) + winOffset + 65) + "px;top:" + (y(d.WLD)+65) + "px;");
 		tooltip.select(".tooltip-year").text(formatValue(d.year));
 		tooltip.select(".tooltip-wld").text(d.WLD)
 		tooltip.select(".tooltip-eu").text(d.ECS)
