@@ -158,7 +158,7 @@ function plotting(data) {
 	, height = 500 - margin.top - margin.bottom;
 
 	// add svg canvas dimensions
-	var svg = d3.select("body")
+	var svg = d3.select("#emissionViz")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
