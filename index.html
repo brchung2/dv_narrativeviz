@@ -505,10 +505,10 @@ function plotting(data) {
 	
 	// =========================== Legend ===========================	
 	// legend keys
-	var keys = ["Global", "East Asia", "Europe", "North America"]
+	var keys = ["Global", "Europe", "North America", "East Asia"]
 
 	// set colors to legend keys
-	var color = d3.scaleOrdinal().domain(keys).range(d3.schemeSet2);
+	var color = d3.scaleOrdinal().domain(keys).range(["#5daf4c", "#004cff", "#FF6A33", "#D033FF"]);
 
 	// Add one dot in the legend for each name.
 	svg.selectAll("circle")
@@ -516,7 +516,7 @@ function plotting(data) {
 	.enter()
 	.append("circle")
 	.attr("cx", width + 30)
-	.attr("cy", function (d, i) { return 300 + i * 25 })
+	.attr("cy", function (d, i) { return 200 + i * 25 })
 	.attr("r", 7)
 	.style("fill", function (d) { return color(d) })
 
@@ -526,7 +526,7 @@ function plotting(data) {
 	.enter()
 	.append("text")
 	.attr("x", width + 40)
-	.attr("y", function (d, i) { return 300 + i * 25 })
+	.attr("y", function (d, i) { return 200 + i * 25 })
 	.style("fill", function (d) { return color(d) })
 	.text(function (d) { return d })
 	.attr("text-anchor", "left")
