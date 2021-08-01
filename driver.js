@@ -310,7 +310,7 @@ $(document).ready(function(){
 
     
             if(slideNum == 2) {
-		var yearthreshold_prev = JSON.parse(JSON.stringify(yearthreshold));
+		var yearthreshold_prev = yearthreshold ;
 		    
                 var pathprev = svg.append("path")
                 .datum(data.filter(function(d) {return d.year <= yearthreshold_prev;}))
