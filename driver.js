@@ -312,7 +312,7 @@ $(document).ready(function(){
             if(slideNum == 2) {
 		var yearthreshold_prev = yearthreshold;
                 var pathprev = svg.append("path")
-                .datum(data.filter(function(d) {return d.year <= yearthreshold_prev;}))
+                .datum(data.filter(function(d) {return d.year <= 1975;}))
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.year); }) 
                 .y(function(d) { return y(d.WLD); }))  
@@ -325,7 +325,7 @@ $(document).ready(function(){
 		var yearthreshold = 1983;
 
                 var path = svg.append("path")
-                    .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= yearthreshold;}))
+                    .datum(data.filter(function(d) {return d.Year >= 1975 && d.Year <= 1983;}))
 			.attr("d", d3.line()
 			.x(function(d) { return x(d.year); }) 
 			.y(function(d) { return y(d.WLD); }))  
