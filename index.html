@@ -78,7 +78,7 @@ function plotting(data) {
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
 	var margin = {top: 30, right: 150, bottom: 50, left: 50}
-	, width = 740 - margin.left - margin.right
+	, width = 800 - margin.left - margin.right
 	, height = 450 - margin.top - margin.bottom;
 
 	// add svg canvas dimensions
@@ -505,7 +505,7 @@ function plotting(data) {
 	
 	// =========================== Legend ===========================	
 	// legend keys
-	var keys = ["Global" ,"East Asia", "Europe", "North America"]
+	var keys = ["Global", "East Asia", "Europe", "North America"]
 
 	// set colors to legend keys
 	var color = d3.scaleOrdinal().domain(keys).range(d3.schemeSet2);
