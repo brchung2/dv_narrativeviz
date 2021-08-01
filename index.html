@@ -159,6 +159,59 @@ async function init() {
 // code for plotting chart
 function plotting(data) {
 	
+	// =========================== initiate webpg with scene 1 ===========================	
+	var showCar = -1; // remove these later
+	var showTruck = -1;
+	var slideNumber = 1;
+	
+	// Initiate webpage with slide one
+	$('#slideOne').removeClass('inactiveSlide');
+	$('#navItemOne').addClass('active')
+	slide(slideNumber, showCar, showTruck);
+
+	// Navigation functionality
+	$('.navItem').click(function(){
+
+	// Set nav active color
+	$('.navItem').removeClass('active');
+	$(this).addClass('active'); 
+
+	// Remove current slide
+	$('svg').remove();
+
+	// Set all slide details to not display
+	$('#slideDetails div').addClass('inactiveSlide'); 
+
+	// Call slide function
+	if ($(this).is('#navItemOne')) {
+	    $('#slideOne').removeClass('inactiveSlide');
+	    slideNumber = 1;
+	    slide(slideNumber, showCar, showTruck);
+	}
+
+	if ($(this).is('#navItemTwo')) {
+	    $('#slideTwo').removeClass('inactiveSlide');
+	    slideNumber = 2;
+	    slide(slideNumber, showCar, showTruck);
+	}
+
+	if ($(this).is('#navItemThree')) {
+	    $('#slideThree').removeClass('inactiveSlide');
+	    slideNumber = 3;
+	    slide(slideNumber, showCar, showTruck);
+	}
+
+	if ($(this).is('#navItemFour')) {
+	    $('#slideFour').removeClass('inactiveSlide');
+	    slideNumber = 4;
+	    slide(slideNumber, showCar, showTruck);
+	}
+
+	});   
+	
+	
+	
+	function slide(slideNum, shwCar, shwTruck){
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
 	var margin = {top: 50, right: 150, bottom: 50, left: 50}
@@ -229,48 +282,57 @@ function plotting(data) {
 	.text("CO2 Emissions - billion metric tons"); 
 
 	// =========================== Add data lines to graph ===========================
+	if(slideNum == 1) {
+		// WORLD data
+		svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1975;})) 
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.WLD); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#5daf4c") 
+		.attr("stroke-width", 3);
+		
+		// Animate emissions line
+                var pathLength = path.node().getTotalLength();
 
+                path.attr("stroke-dasharray", pathLength)
+                    .attr("stroke-dashoffset", pathLength)
+                    .transition()
+                    .duration(4000) 
+                    .ease(d3.easeSin) 
+                    .attr("stroke-dashoffset", 0);
 
-	// WORLD data
-	svg.append("path")
-	.datum(data) 
-	.attr("d", d3.line()
-	.x(function(d) { return x(d.year); }) 
-	.y(function(d) { return y(d.WLD); }))  
-	.attr("fill", "none")
-	.attr("stroke", "#5daf4c") 
-	.attr("stroke-width", 3);
+		// North america data
+		svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1975;})) 
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.NAC); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#FF6A33") 
+		.attr("stroke-width", 3);
 
-	// North america data
-	svg.append("path")
-	.datum(data) 
-	.attr("d", d3.line()
-	.x(function(d) { return x(d.year); }) 
-	.y(function(d) { return y(d.NAC); }))  
-	.attr("fill", "none")
-	.attr("stroke", "#FF6A33") 
-	.attr("stroke-width", 3);
+		// Europe data in blue
+		svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1975;})) 
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.ECS); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#004cff") 
+		.attr("stroke-width", 3);
 
-	// Europe data in blue
-	svg.append("path")
-	.datum(data) 
-	.attr("d", d3.line()
-	.x(function(d) { return x(d.year); }) 
-	.y(function(d) { return y(d.ECS); }))  
-	.attr("fill", "none")
-	.attr("stroke", "#004cff") 
-	.attr("stroke-width", 3);
-	
-	// Asia data
-	svg.append("path")
-	.datum(data) 
-	.attr("d", d3.line()
-	.x(function(d) { return x(d.year); }) 
-	.y(function(d) { return y(d.EAS); }))  
-	.attr("fill", "none")
-	.attr("stroke", "#D033FF") 
-	.attr("stroke-width", 3);
-
+		// Asia data
+		svg.append("path")
+		.datum(data.filter(function(d) {return d.year <= 1975;})) 
+		.attr("d", d3.line()
+		.x(function(d) { return x(d.year); }) 
+		.y(function(d) { return y(d.EAS); }))  
+		.attr("fill", "none")
+		.attr("stroke", "#D033FF") 
+		.attr("stroke-width", 3);
+		}
 	// =========================== Gridlines ===========================
 	// X axis gridllines (vertical)
 	function make_x_gridlines() {
