@@ -1198,7 +1198,15 @@ $(document).ready(function(){
 		.attr("y", y(27))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Global Financial Crisis & Kyoto Protocol")
+		.text("Global Financial Crisis & Kyoto Protocol:")
+		.call(wrap, 80);  
+		    
+		svg.append("text")
+		.attr("x", x(2008.5))             
+		.attr("y", y(20))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("2.5% drop")
 		.call(wrap, 80);  
             }
 		
@@ -1219,8 +1227,16 @@ $(document).ready(function(){
 		.attr("y", y(30))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Paris Climate Agreement")
+		.text("Paris Climate Agreement:")
 		.call(wrap, 80);  
+		    
+		svg.append("text")
+		.attr("x", x(2015.5))             
+		.attr("y", y(27))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("0.65% drop")
+		.call(wrap, 80); 
             }
 
 //             // Set whether to show car and truck
