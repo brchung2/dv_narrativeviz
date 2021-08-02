@@ -61,8 +61,7 @@ $(document).ready(function(){
     });   
     
    
-    
-    // START - Slide Function  -----------------------------------------------------------------------
+
     function slide(slideNum){
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
