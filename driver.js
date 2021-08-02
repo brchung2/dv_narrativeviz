@@ -1156,19 +1156,6 @@ $(document).ready(function(){
 		.text("0.65% drop")
 		.call(wrap, 80); 
             }
-
-//             // Set whether to show car and truck
-
-//             if (shwCar == 1) {
-//                 $(".carMPG").attr("display",null);
-//                 $(".axisMPG").attr("display",null);
-//             }
-
-//             if (shwTruck == 1) {
-//                 $(".truckMPG").attr("display",null);
-//                 $(".axisMPG").attr("display",null);
-//             }
-     
             
 
 		// =========================== Tooltip ===========================
