@@ -1137,11 +1137,19 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1992))             
-		.attr("y", y(27))
+		.attr("y", y(30))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Soviet Union Collapse")
+		.text("Soviet Union Collapse: ")
 		.call(wrap, 60);  
+		
+		svg.append("text")
+		.attr("x", x(1992))             
+		.attr("y", y(29))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("2.5% drop")
+		.call(wrap, 80);  
             }
 		
 	    // annotation 4
