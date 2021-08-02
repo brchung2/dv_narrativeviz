@@ -1145,7 +1145,7 @@ $(document).ready(function(){
 		
 		svg.append("text")
 		.attr("x", x(1992))             
-		.attr("y", y(24))
+		.attr("y", y(25))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("2.5% drop")
@@ -1174,10 +1174,10 @@ $(document).ready(function(){
 		    
 		svg.append("text")
 		.attr("x", x(1998))             
-		.attr("y", y(27))
+		.attr("y", y(26.5))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("drop")
+		.text("0.6% drop")
 		.call(wrap, 80);  
             }
 		
