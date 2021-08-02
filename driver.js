@@ -1077,11 +1077,13 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1974))             
-		.attr("y", y(20))
+		.attr("y", y(25))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("Oil Crisis: global emissions constant at 17BMT")  
-		.call(wrap, 90);
+		.call(wrap, 110);
+		  
+
             }
 
             // annotation 2
