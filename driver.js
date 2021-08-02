@@ -1080,7 +1080,7 @@ $(document).ready(function(){
 		.attr("y", y(20))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Oil Crisis");  
+		.text("Oil Crisis: global emissions constant at 17BMT");  
 		    
             }
 
@@ -1201,50 +1201,7 @@ $(document).ready(function(){
 //                 $(".axisMPG").attr("display",null);
 //             }
      
-//             // Tool Tip
-//             var tooltip = d3.select("body").append("div")
-//                 .attr("class", "tooltip")
-//                 .style("display", "none");    
-
-//             var focus = svg.append("g")
-//                 .attr("class", "focus")
-//                 .style("display", "none");
-
-//             focus.append("circle")
-//                 .attr("r", 5);
-
-//             var tooltipDate = tooltip.append("div")
-//                 .attr("class", "tooltip-date");
-
-//             // Emissions section    
-//             var tooltipEmissions = tooltip.append("div");
-
-//             tooltipEmissions.append("span")
-//                 .attr("class", "tooltip-title")
-//                 .text("Emissions: ");
-
-//             var tooltipEmissionsValue = tooltipEmissions.append("span")
-//                 .attr("class", "tooltip-emissions");
-                
-//             // Car MPG section    
-//             var tooltipCar = tooltip.append("div");
-
-//             tooltipCar.append("span")
-//                 .attr("class", "tooltip-title")
-//                 .text("Car MPG: ");
-
-//             var tooltipCarValue = tooltipCar.append("span")
-//                 .attr("class", "tooltip-car");      
-
-//             // Truck MPG section    
-//             var tooltipTruck = tooltip.append("div");
-
-//             tooltipTruck.append("span")
-//                 .attr("class", "tooltip-title")
-//                 .text("Truck MPG: ");
-
-//             var tooltipTruckValue = tooltipTruck.append("span")
-//                 .attr("class", "tooltip-truck");                 
+            
 
 		// =========================== Tooltip ===========================
 		// source from: https://bl.ocks.org/Qizly/8f6ba236b79d9bb03a80
