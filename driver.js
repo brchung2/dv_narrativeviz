@@ -1080,7 +1080,26 @@ $(document).ready(function(){
 		.attr("y", y(23))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Oil Crisis global emissions constant at 17BMT")  
+		.text("Oil Crisis:")  
+		.call(wrap, 100);
+		    
+		 // annotation 1.5		
+		var left = x(1973);
+		var right = x(1975);
+		var wid = right - left;
+		svg.append("rect")
+		.attr("x", left)
+		.attr("width", wid)
+		.attr("height", height)
+		.style("opacity", 0.5)
+		.style("fill", "#F5FF33");
+
+		svg.append("text")
+		.attr("x", x(1974))             
+		.attr("y", y(22))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("Global emissions constant at 17BMT")  
 		.call(wrap, 100);
 		  
 
