@@ -1166,7 +1166,7 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1998))             
-		.attr("y", y(30))
+		.attr("y", y(31))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("Asian Financial Crisis: ")
@@ -1174,7 +1174,7 @@ $(document).ready(function(){
 		    
 		svg.append("text")
 		.attr("x", x(1998))             
-		.attr("y", y(26.5))
+		.attr("y", y(27))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("0.6% drop")
