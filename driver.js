@@ -1084,16 +1084,6 @@ $(document).ready(function(){
 		.call(wrap, 100);
 		    
 		 // annotation 1.5		
-		var left = x(1973);
-		var right = x(1975);
-		var wid = right - left;
-		svg.append("rect")
-		.attr("x", left)
-		.attr("width", wid)
-		.attr("height", height)
-		.style("opacity", 0.5)
-		.style("fill", "#F5FF33");
-
 		svg.append("text")
 		.attr("x", x(1974))             
 		.attr("y", y(22))
@@ -1119,10 +1109,17 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1981))             
-		.attr("y", y(21))
+		.attr("y", y(26))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Oil Crisis 2");  
+		.text("Oil Crisis 2: ");  
+		    
+		svg.append("text")
+		.attr("x", x(1981))             
+		.attr("y", y(25))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("3.2% drop");  
             }
 
 
