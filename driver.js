@@ -1,14 +1,14 @@
 $(document).ready(function(){
-    // Global Variables
-    var showCar = -1;
-    var showTruck = -1;
+
+//     var showCar = -1;
+//     var showTruck = -1;
     var slideNumber = 1;
 
 
     // Initiate webpage with slide one
     $('#scene1').removeClass('inactiveSlide');
     $('#navItemOne').addClass('active')
-    slide(slideNumber, showCar, showTruck);
+    slide(slideNumber);
 
     // Navigation functionality
     $('.navItem').click(function(){
@@ -27,37 +27,37 @@ $(document).ready(function(){
         if ($(this).is('#navItemOne')) {
             $('#scene1').removeClass('inactiveSlide');
             slideNumber = 1;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 
         if ($(this).is('#navItemTwo')) {
             $('#scene2').removeClass('inactiveSlide');
             slideNumber = 2;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 
         if ($(this).is('#navItemThree')) {
             $('#scene3').removeClass('inactiveSlide');
             slideNumber = 3;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 
         if ($(this).is('#navItemFour')) {
             $('#scene4').removeClass('inactiveSlide');
             slideNumber = 4;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 	    
 	if ($(this).is('#navItemFive')) {
             $('#scene5').removeClass('inactiveSlide');
             slideNumber = 5;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 	    
 	if ($(this).is('#navItemSix')) {
             $('#scene6').removeClass('inactiveSlide');
             slideNumber = 6;
-            slide(slideNumber, showCar, showTruck);
+            slide(slideNumber);
         }
 
     });   
@@ -145,7 +145,7 @@ $(document).ready(function(){
     });
     
     // START - Slide Function  -----------------------------------------------------------------------
-    function slide(slideNum, shwCar, shwTruck){
+    function slide(slideNum){
 	// =========================== Chart Dimensions ===========================	
 	// set line chart dimensions
 	var margin = {top: 50, right: 150, bottom: 50, left: 50}
@@ -1346,8 +1346,7 @@ $(document).ready(function(){
                 .on("mouseout", function() { focus.style("display", "none"); tooltip.style("display", "none"); })
                 .on("mousemove", mousemove);   
 
-            // Set year threshold
-//             var yearThresh = 1975;
+            // Set year threshold for each slide's tooltip
 
             if (slideNum == 1) {
                 yearThresh = 1975;
