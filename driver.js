@@ -1109,14 +1109,14 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1981))             
-		.attr("y", y(26))
+		.attr("y", y(25))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("Oil Crisis 2: ");  
 		    
 		svg.append("text")
 		.attr("x", x(1981))             
-		.attr("y", y(25))
+		.attr("y", y(24))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("3.2% drop");  
@@ -1137,15 +1137,15 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1992))             
-		.attr("y", y(30))
+		.attr("y", y(28))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("Soviet Union Collapse: ")
-		.call(wrap, 60);  
+		.call(wrap, 100);  
 		
 		svg.append("text")
 		.attr("x", x(1992))             
-		.attr("y", y(29))
+		.attr("y", y(24))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
 		.text("2.5% drop")
@@ -1166,10 +1166,18 @@ $(document).ready(function(){
 
 		svg.append("text")
 		.attr("x", x(1998))             
-		.attr("y", y(29))
+		.attr("y", y(30))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Asian Financial Crisis")
+		.text("Asian Financial Crisis: ")
+		.call(wrap, 80);  
+		    
+		svg.append("text")
+		.attr("x", x(1998))             
+		.attr("y", y(27))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "14px")
+		.text("drop")
 		.call(wrap, 80);  
             }
 		
