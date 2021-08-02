@@ -1080,8 +1080,8 @@ $(document).ready(function(){
 		.attr("y", y(20))
 		.attr("text-anchor", "middle")  
 		.style("font-size", "14px")
-		.text("Oil Crisis: global emissions constant at 17BMT");  
-		.call(wrap, 90)   
+		.text("Oil Crisis: global emissions constant at 17BMT")  
+		.call(wrap, 90);
             }
 
             // annotation 2
